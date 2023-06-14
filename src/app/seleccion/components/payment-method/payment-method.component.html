@@ -1,0 +1,67 @@
+<div class="pay-option-ctn" *ngIf="paymentMethodId === 1 || paymentMethodId === 2">
+    <mat-grid-list cols="6" rowHeight="2.8rem" class="tipos-opciones-pago">
+        <mat-grid-tile>
+            <mat-icon class="padding-left-5 margin-top-4 card-icon" svgIcon="card-tick"></mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="seleccion__step-2-subtitulo">
+            <div class="text-inside-grid">{{ title }}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-icon
+                [matTooltip]="paymentInfo"
+                matTooltipClass="info-tooltip"
+                class="padding-left-5 margin-top-4 card-icon" svgIcon="info-help"></mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <!-- boton A -->
+    <div [class]="(!paymentActive) ? 'payment-disabled' : 'opcion-pago'">
+        <mat-grid-list cols="6" (click)="(!paymentActive) ? '' : paymentMethodDispatch()" (keypress)="(!paymentActive) ? '' : paymentMethodDispatch()">
+            <mat-grid-tile colspan="5">
+                <div class="img-inside-grid">
+                    <img *ngIf="paymentMethodId === 1" class="img-mediopago" [src]="(paymentActive) ? '../../../assets/mdp-onepay.svg' : '../../../assets/webOneClickDisabled.svg'" />
+                    <img *ngIf="paymentMethodId === 2" class="img-mediopago" [src]="(paymentActive) ? '../../../assets/mdp-webpay.svg' : '../../../assets/webPlusDisabled.svg'" />
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-icon [class]="(paymentActive) ? 'color-verde-petrobras' : 'color-gris'">keyboard_arrow_right</mat-icon>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <!-- boton A -->
+</div>
+
+<!-- cash -->
+<div *ngIf="paymentMethodId === 3">
+    <mat-grid-list cols="6" rowHeight="2.8rem" class="tipos-opciones-pago">
+        <mat-grid-tile>
+            <div>
+                <div class="step-2-circulo-align-verticar">
+                    <mat-icon svgIcon="profile" class="card-icon"></mat-icon>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" class="seleccion__step-2-subtitulo">
+            <div class="text-inside-grid">{{ title }}</div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-icon class="padding-left-5 margin-top-4 card-icon"
+                [matTooltip]="paymentInfo"
+                matTooltipClass="info-tooltip"
+                svgIcon="info-help"></mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="6" rowHeight="3.5rem" [class]="(!paymentActive) ? 'payment-disabled' : 'opcion-pago'"
+    (click)="(!paymentActive) ? '' : paymentMethodDispatch()" (keypress)="(!paymentActive) ? '' : paymentMethodDispatch()">
+        <mat-grid-tile>
+            <mat-icon [svgIcon]="(!paymentActive) ? 'money-disabled' : 'money'" class="icono-dinero"></mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4">
+            <div [class]="(paymentActive) ? 'text-inside-grid seleccion__step-2-llamar-atendendor' : 'text-inside-grid seleccion__step-2-llamar-atendendor color-gris'">
+                Efectivo
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-icon [class]="(paymentActive) ? 'color-verde-petrobras' : 'color-gris'">keyboard_arrow_right</mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

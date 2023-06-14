@@ -1,0 +1,32 @@
+<div class="interior-content debito-credito">
+    <div class="contenido margin-bottom-20">
+        <h2 class="titulo">
+            Agregar tarjeta
+            <span class="credito-debito-x">
+                <mat-icon aria-hidden="false" class="cerrar-modal" aria-label="Cerrar" (click)="cerrar()" >close</mat-icon>
+            </span>
+        </h2>
+        <h3 class="texto-descriptivo">Selecciona tu medio de pago</h3>
+
+        <div class="tarjeta-recuadro cursor-pointer" (click)="cerrar('DEBITO')" [ngClass]="{'tarjeta-recuadro-borde-verde':opcionSeleccionada === 'DEBITO' }">
+            <mat-icon class="margin-left-10 height-width-31" svgIcon="card-debito"></mat-icon>
+            <div class="car">
+                <span class="car-type">Débito</span>
+            </div>
+            <mat-icon class="del">chevron_right</mat-icon>
+        </div>
+        <div class="tarjeta-recuadro-separador"></div>
+        <div class="tarjeta-recuadro cursor-pointer" (click)="cerrar('CREDITO')" [ngClass]="{'tarjeta-recuadro-borde-verde':opcionSeleccionada === 'CREDITO' }" >
+            <mat-icon class="margin-left-10 height-width-31" svgIcon="card-credito"></mat-icon>
+            <div class="car">
+                <span class="car-type">Crédito</span>
+            </div>
+            <mat-icon class="del">chevron_right</mat-icon>
+        </div>
+
+
+
+
+
+    </div>
+</div>

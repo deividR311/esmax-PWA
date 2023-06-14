@@ -1,0 +1,666 @@
+<!-- ---------------- error block ------------- -->
+<div class="interior-content" [ngClass]="{'error-exclude': !showAlert}">
+    <div class="showError-wrapper" *ngIf="showAlert">
+        <h2>No se puede continuar...</h2>
+        <img src='../../../assets/error.svg' />
+        <div class="error-mensage">{{showAlertMensaje}}</div>
+    </div>
+</div>
+<!-- ---------------- error block ------------- -->
+ 
+<div class="interior-content-seleccion" [ngClass]="{'error-exclude': showAlert}">
+    <div class="esmax-stepper">
+        <mat-horizontal-stepper labelPosition="bottom" #stepper class="stepper-seleccion-monto">
+            <ng-template matStepperIcon="edit">
+                <mat-icon>done</mat-icon>
+            </ng-template>
+            <!-- ------------------ index[0]: producto ------------------ -->
+            <mat-step [stepControl]="primerPaso" *ngIf="!showAlert;">
+                <!-- <form [formGroup]="firstFormGroup"> -->
+                <ng-template matStepLabel matStepperIcon="phone">Producto</ng-template>
+                <div class="seleccion-productos-list contenido-principal div-center">
+                    <h2 class="seleccion-title">Selecciona tu producto</h2>
+
+                    <!-- ONLY TESTING DEVELOP 
+                    <a (click)="verBoletaGoogleViewer()" *ngIf="!isproduction"> TEST - TEST - TEST</a> -->
+
+                    <!-- producto NOVENTA3 -->
+                    <a (click)="clickProducto(PRODUCTO.NOVENTA3)" *ngIf="showProductosDisponibles(PRODUCTO.NOVENTA3); else elseNOVENTA3">
+                        <img src='../../../assets/producto-93.svg' />
+                    </a>
+                    <ng-template #elseNOVENTA3><img style="opacity: 0.3;cursor: not-allowed;" src='../../../assets/producto-93.svg' /></ng-template>
+
+                    <!-- producto NOVENTA5 -->
+                    <a (click)="clickProducto(PRODUCTO.NOVENTA5)" *ngIf="showProductosDisponibles(PRODUCTO.NOVENTA5); else elseNOVENTA5">
+                        <img src='../../../assets/producto-95.svg' />
+                    </a>
+                    <ng-template #elseNOVENTA5><img style="opacity: 0.3;cursor: not-allowed;" src='../../../assets/producto-95.svg' /></ng-template>
+
+                    <!-- producto NOVENTA7 -->
+                    <a (click)="clickProducto(PRODUCTO.NOVENTA7)" *ngIf="showProductosDisponibles(PRODUCTO.NOVENTA7); else elseNOVENTA7">
+                        <img src='../../../assets/producto-97.svg' />
+                    </a>
+                    <ng-template #elseNOVENTA7><img style="opacity: 0.3;cursor: not-allowed;" src='../../../assets/producto-97.svg' /></ng-template>
+
+                    <!-- producto DIESEL -->
+                    <a (click)="clickProducto(PRODUCTO.DIESEL)" *ngIf="showProductosDisponibles(PRODUCTO.DIESEL); else elseDIESEL">
+                        <img src='../../../assets/producto-d.svg' />
+                    </a>
+                    <ng-template #elseDIESEL><img style="opacity: 0.3;cursor: not-allowed;" src='../../../assets/producto-d.svg' /></ng-template>
+
+
+                </div>
+            </mat-step>
+
+
+            <!-- ------------------ index[1]: monto ------------------ -->
+            <mat-step [stepControl]="segundoPaso" *ngIf="!showAlert;">
+                <!-- <form [formGroup]="secondFormGroup" class="form-seleccion"> -->
+                <ng-template matStepLabel>Monto</ng-template>
+                <div class="seleccion-productos-list contenido-principal div-center" *ngIf="isOfferListSection && orden.productoSeleccionado">
+                    <h2 *ngIf="!offerMyClub;else sectionclub" class="seleccion-title">Selecciona tu descuento</h2>
+                    <ng-template #sectionclub><h2 class="seleccion-title">Selecciona tu beneficio</h2></ng-template>
+                    <mat-grid-list cols="6" rowHeight="3.5rem" [class]="(offer.selected) ? 'offer-selected' : 'ctn-offer'"
+                        *ngFor="let offer of offerlist" (click)="chooseOffer( offer )" (keypress)="chooseOffer( offer )">
+                        <div>
+                            <mat-grid-tile colspan="4">
+                                <div class="ctn-offerLabel">{{ offer.nombreAlianza+"#"+offer.nombreOcurrencia | namePromotionPipe}}</div>
+                            </mat-grid-tile>
+                            <mat-grid-tile *ngIf="!offerMyClub;else sectionclubDiscount" colspan="2">
+                                $ {{ offer.descuentoUnitario }} x litro
+                            </mat-grid-tile>
+                            <ng-template #sectionclubDiscount>
+                                <mat-grid-tile colspan="2">
+                                MI CLUB
+                                </mat-grid-tile>
+                            </ng-template>
+                        </div>
+                    </mat-grid-list>
+                    <mat-grid-list cols="6" rowHeight="3.5rem" class="ctn-offer-btn">
+                        <div>
+                            <mat-grid-tile colspan="4">
+                                <button mat-flat-button class="offer-btn-No-offer" (click)="applyOfferToOrder(false)">
+                                    <span *ngIf="!offerMyClub;else sectionclubButton">No quiero descuento</span>
+                                    <ng-template #sectionclubButton><span>No quiero beneficio</span></ng-template>
+                                </button>
+                            </mat-grid-tile>
+                            <mat-grid-tile colspan="2">
+                                <button mat-flat-button class="offer-btn" [disabled]="!orden.discount && !orden.discountAlliance" (click)="applyOfferToOrder( true )">Continuar</button>
+                            </mat-grid-tile>
+                        </div>
+                    </mat-grid-list>
+                </div>
+                <div class="seleccion-montos-list" *ngIf="!isOfferListSection">
+                    <div class="resumen-compra-container">
+                        <div class="resumen-compra contenido-principal">
+                            <div class="col-1"> Resumen <div>de compra</div>
+                            </div>
+                            
+                            <div class="col-3">
+                                <div class="resumen-producto">
+                                    <img alt="producto" src="../../../assets/resumen-gasolina.svg" />
+                                    <div *ngIf="orden.productoSeleccionado?.frontend_productname != 'DIESEL'">Gasolina</div>
+                                    <span>{{orden.productoSeleccionado?.frontend_productname}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <h2 class="seleccion-title">Selecciona tu monto a cargar</h2>
+                    <div class="selecciona-tu-monto contenido-principal div-center">
+                        <mat-grid-list cols="2" rowHeight="4rem" class="monto-de-seleccion" [gutterSize]="'8px'">
+                            <mat-grid-tile class="justify-content-flex-start" *ngFor="let monto of montosDisponibles; let i = index;" [ngClass]="{'margin-left-grid': ((i + 1) % 2) == 0, 'margin-right-grid': ((i + 1) % 2) != 0 }" >
+                                <div  [class]="(!orden?.maxAmount) ? 'width-100 div-montos' : (monto <= orden?.maxAmount) ? 'width-100 div-montos' : 'width-100 monto-disabled'" >
+                                    <div class="width-100 div-montos-contenido cursor-pointer"
+                                        (click)="(!orden?.maxAmount) ? clickMonto(monto) : (monto <= orden?.maxAmount) ? clickMonto(monto) : ''"
+                                        (keypress)="(!orden?.maxAmount) ? clickMonto(monto) : (monto <= orden?.maxAmount) ? clickMonto(monto) : ''">
+                                        <div class="text-monto">
+                                            ${{monto | number}}
+                                        </div>
+                                        <span class="float-right">
+                                            <mat-icon class="color-verde-petrobras">keyboard_arrow_right</mat-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                            </mat-grid-tile>
+                        </mat-grid-list>
+                        <div class="ctn-show-offer" *ngIf="orden.discount || orden.discountAlliance">
+                            <div class="ctn-show-offer-text">
+                                <p>A continuación se muestra el descuento seleccionado que se aplicará a tu compra.</p>
+                            </div>
+                            <mat-grid-list cols="6" rowHeight="3.5rem" class="ctn-offer">
+                                <div>
+                                    <mat-grid-tile *ngIf="!offerMyClub;else sectionclubMessage" colspan="6">
+                                        $ {{ (orden.discount) ? orden.discount : 0 }} x litro
+                                    </mat-grid-tile>
+                                    <ng-template #sectionclubMessage>
+                                        <mat-grid-tile colspan="6">
+                                            ACUMULAS PESOS MI CLUB
+                                        </mat-grid-tile>
+                                    </ng-template>
+                                </div>
+                            </mat-grid-list>
+                            <div class="ctn-show-offer-btn">
+                                <button mat-flat-button class="offer-btn-No-offer" [disabled]="!orden.discount && !orden.discountAlliance" (click)="removeOffer()">Eliminar descuento</button>
+                            </div>
+                        </div>
+
+                        <!--<div>
+                            <mat-grid-list cols="6" rowHeight="2.7rem" class="button-otro-monto" (click)="abrirModalOtroMonto()">
+                                <mat-grid-tile colspan="5">
+                                    <span class="button-otro-monto-text">Otro monto</span>
+                                </mat-grid-tile>
+                                <mat-grid-tile colspan="1">
+                                    <mat-icon class="color-ceniza button-otro-monto-icon">keyboard_arrow_right</mat-icon>
+                                </mat-grid-tile>
+                            </mat-grid-list>
+                        </div>-->
+                    </div>
+
+                </div>
+                <!-- </form> -->
+            </mat-step>
+
+
+            <!-- ------------------ index[2]: pago ------------------- -->
+            <mat-step [stepControl]="tercerPaso" *ngIf="!showAlert;">
+                <ng-template matStepLabel>Pago</ng-template>
+                <div class="seleccion-mediospago-list" *ngIf="!isPagoReady">
+                    <div class="resumen-compra-container ajuste-padding">
+                        <div class="resumen-compra contenido-principal div-center">
+                            <div class="col-1"> Resumen <div>de compra</div>
+                            </div>
+                            
+                            <div class="col-3">
+                                <div class="resumen-producto">
+                                    <img alt="producto" src="../../../assets/resumen-gasolina.svg" />
+                                    <div *ngIf="orden.productoSeleccionado?.frontend_productname != 'DIESEL'">Gasolina</div>
+                                    <span>{{orden.productoSeleccionado?.frontend_productname}}</span>
+                                </div>
+                                <div class="resumen-producto">
+                                    <img alt="monto" src="../../../assets/resumen-efectivo.svg" /> Monto <span> ${{orden.monto | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="show-offer-on-payment" *ngIf="orden.discount || orden.discountAlliance">
+                            <span *ngIf="!offerMyClub;else sectionclubResumen">$ {{ orden.discount }} x litro</span>
+                            <ng-template #sectionclubResumen><span>ACUMULAS PESOS MI CLUB</span></ng-template>
+                        </div>
+                    </div>
+
+                    <h2 class="seleccion-title text-align-center">¿Cómo quieres pagar?</h2>
+                    <div class="seleccion__step-2-content contenido-principal div-center">
+                        <div *ngIf="paymentMethods">
+                            <div *ngFor="let paymentMethod of paymentMethods">
+                                <app-payment-method
+                                    [paymentMethod]="paymentMethod"
+                                    (paymentMethodFunction)="clickMdePago( paymentMethod.paymentMethodId )"
+                                    [events]="eventsSubjectPayment.asObservable()"
+                                ></app-payment-method>
+                                <!-- chek -->
+                                <div *ngIf="paymentMethod.paymentMethodId === '4'">
+                                    <mat-grid-list cols="6" rowHeight="2.8rem" class="tipos-opciones-pago">
+                                        <mat-grid-tile>
+                                            <mat-icon class="padding-left-5 margin-top-4 card-icon" svgIcon="card-slash"></mat-icon>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile colspan="4" class="seleccion__step-2-subtitulo">
+                                            <div class="text-inside-grid">Quiero pagar con mi billetera</div>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile>
+                                            <mat-icon class="padding-left-5 margin-top-4 card-icon"
+                                                matTooltip="Te permitirá pagar con las tarjetas guardadas en estas aplicaciones"
+                                                matTooltipClass="info-tooltip"
+                                                svgIcon="info-help"></mat-icon>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                    <mat-grid-list cols="6" rowHeight="3.5rem" [class]="(!paymentMethod.active) ? 'payment-disabled-chek' : 'opcion-chek'" #SectionChek
+                                    (click)="(!paymentMethod.active) ? '' : clickMdePago(paymentMethod.paymentMethodId)" (keypress)="(!paymentMethod.active) ? '' : clickMdePago(paymentMethod.paymentMethodId)">
+                                        <mat-grid-tile>
+                                            <mat-icon [svgIcon]="(paymentMethod.active) ? 'chek' : 'chek-disabled'"></mat-icon>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile colspan="5">
+                                            <div [class]="(paymentMethod.active)
+                                                ? 'text-inside-grid seleccion__step-2-llamar-atendendor color-white'
+                                                : 'text-inside-grid seleccion__step-2-llamar-atendendor color-gris'">
+                                                Pagar con mi billetera
+                                            </div>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                    <mat-grid-list cols="6" rowHeight="4rem" class="opcion-chek margin-bottom-24"
+                                    style="cursor: auto; display: none;" #SectionChekPasoReenviar>
+                                        <mat-grid-tile colspan="3" style="float: left;">
+                                            <mat-icon svgIcon="chek"></mat-icon>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile colspan="3">
+                                            <div style="float: right;">
+                                                <a href="javascript:void(0);" (click)="cancelarChek()" class="color-white" style="cursor: pointer;">Cancelar</a>
+                                            </div>
+                                        </mat-grid-tile>
+                                        <mat-grid-tile colspan="6">
+                                            <div class="text-inside-grid seleccion__step-2-llamar-atendendor color-white" style="text-align: center; vertical-align: middle; margin: 0 auto; width: 100%; margin-bottom: 12px;">
+                                                No ha sido posible conectar su billetera
+                                                <button mat-stroked-button style="font-weight: normal; font-size: 14px; margin-top: 2px;" (click)="intentarPagoChek()">Intentar de nuevo</button>
+                                            </div>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                    <mat-grid-list cols="6" rowHeight="3.6rem" class="opcion-chek margin-bottom-24" style="display: none; cursor: none;" #SectionTelefonoChek>
+                                        <mat-grid-tile colspan="6">
+                                            <div class="text-inside-grid seleccion__step-2-llamar-atendendor color-white" style="width: 100%; margin: 0 auto; vertical-align: middle;">
+                                                <div class="loading-indicator" style="text-align: center;">
+                                                    Procesando pago ...
+                                                    <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="1" [diameter]="30" style="margin: 0 auto;"></mat-progress-spinner>
+                                                </div>
+                                            </div>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seleccion-pagar" *ngIf="isPagoReady && !isPagoFinished">
+                    <div class="resumen-compra-container ajuste-padding">
+                        <div class="resumen-compra contenido-principal div-center">
+                            <div class="col-1"> Resumen <div>de compra</div>
+                            </div>
+                            
+                            <div class="col-3">
+                                <div class="resumen-producto">
+                                    <img alt="producto" src="../../../assets/resumen-gasolina.svg" />
+                                    <div *ngIf="orden.productoSeleccionado?.frontend_productname != 'DIESEL'">Gasolina</div>
+                                    <span>{{orden.productoSeleccionado?.frontend_productname}}</span>
+                                </div>
+                                <div class="resumen-producto">
+                                    <img alt="monto" src="../../../assets/resumen-efectivo.svg" /> Monto <span> ${{orden.monto | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contenido-principal div-center">
+                        <div >
+                            <h2 class="seleccion-title text-align-center">Detalle de tu compra</h2>
+
+                            <div class="seleccion__resumen-carga margin-bottom-10">
+                                <mat-grid-list [cols]=" 3 - ( (!orden.discount && !orden.discountAlliance) ? 1 : 0) " rowHeight="1.5rem">
+                                    <mat-grid-tile class="seleccion__step-2-titulo-resumen">Precio x Litro</mat-grid-tile>
+                                    <mat-grid-tile class="seleccion__step-2-titulo-resumen">Litros</mat-grid-tile>
+                                    <mat-grid-tile class="seleccion__step-2-titulo-resumen" *ngIf="orden.discount || orden.discountAlliance" >Descuento</mat-grid-tile>
+                                </mat-grid-list>
+                                <mat-grid-list [cols]="3 - ( (!orden.discount && !orden.discountAlliance) ? 1 : 0)" rowHeight="1.5rem">
+                                    <mat-grid-tile class="step-2-consumo">${{orden.productoSeleccionado?.price}}</mat-grid-tile>
+                                    <mat-grid-tile class="step-2-consumo seleccion__step-2-border-leff-color">{{calculateLiters()}}</mat-grid-tile>
+                                    <mat-grid-tile class="step-2-consumo seleccion__step-2-border-leff-color" *ngIf="orden.discount || orden.discountAlliance">
+                                        <span *ngIf="!offerMyClub;else sectionclubDetail">{{orden.discount}} x litro</span>
+                                        <ng-template #sectionclubDetail><span>MI CLUB</span></ng-template>
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="separador margin-top-24" *ngIf="orden.mediopago === MEDIOPAGO.ONECLICK">
+                    <div class="contenido-principal div-center">
+                        <div *ngIf="orden.mediopago === MEDIOPAGO.ONECLICK">
+                            <div class="margin-top-16">
+                                <div class="text-medio-de-pago">Medio de pago</div>
+                                <mat-grid-list cols="7" rowHeight="4rem" class="width-100 dialogselect__list-medio-pago" >
+                                    <mat-grid-tile colspan="1" [ngSwitch]="orden.card?.cardtype" class="justify-content-flex-start">
+                                        <mat-icon class="type-card" svgIcon="americanexpress" *ngSwitchCase="'AmericanExpress'"></mat-icon>
+                                        <mat-icon class="type-card" svgIcon="visa" *ngSwitchCase="'Visa'"></mat-icon>
+                                        <mat-icon class="type-card" svgIcon="redcompra" *ngSwitchCase="'RedCompra'"></mat-icon>
+                                        <mat-icon class="type-card" svgIcon="mastercard" *ngSwitchCase="'Mastercard'"></mat-icon>
+                                        <mat-icon class="type-card" svgIcon="magna" *ngSwitchCase="'Magna'"></mat-icon>
+                                        <mat-icon class="type-card" svgIcon="card-default" *ngSwitchDefault></mat-icon>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="4" class="justify-content-flex-start">
+                                        <div>
+                                            <span class="seleccion__card-type"> {{orden.card?.cardtype}} </span>
+                                            <span class="seleccion__card-number">
+                                                &#8226;&#8226;&#8226;&#8226;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&#8226;&#8226;&#8226;&#8226; {{orden.card?.cardnumber}}
+                                            </span>
+                                        </div>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="justify-content-flex-end">
+                                        <a (click)="clickCambiarTarjeta()" class="cambiar-tarjeta">Cambiar</a>
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+                        <div *ngIf="orden.mediopago === MEDIOPAGO.CASH">
+                            <div class="margin-top-16">
+                                <div class="text-medio-de-pago">Medio de pago</div>
+                                <mat-grid-list cols="7" rowHeight="4rem" class="width-100 dialogselect__list-medio-pago" >
+                                    <mat-grid-tile colspan="1" [ngSwitch]="orden.card?.cardtype" class="justify-content-flex-start">
+                                        <mat-icon class="type-card" svgIcon="money"></mat-icon>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="4" class="justify-content-flex-start">
+                                        <div>
+                                            <span class="seleccion__card-type"> Efectivo </span>
+                                        </div>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="justify-content-flex-end">
+                                        <!-- <a (click)="clickCambiarTarjeta()" class="cambiar-tarjeta">Cambiar</a> -->
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+                        <div *ngIf="orden.mediopago === MEDIOPAGO.CHEK">
+                            <div class="margin-top-16">
+                                <div class="text-medio-de-pago">Medio de pago</div>
+                                <mat-grid-list cols="7" rowHeight="4rem" class="width-100 dialogselect__list-medio-pago" >
+                                    <mat-grid-tile colspan="1" [ngSwitch]="orden.card?.cardtype" class="justify-content-flex-start">
+                                        <mat-icon class="type-card" svgIcon="money"></mat-icon>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="4" class="justify-content-flex-start">
+                                        <div>
+                                            <span class="seleccion__card-type"> Billetera Chek </span>
+                                        </div>
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="justify-content-flex-end">
+                                        <!-- <a (click)="clickCambiarTarjeta()" class="cambiar-tarjeta">Cambiar</a> -->
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="separador">
+                    <div class="contenido-principal div-center">
+                        <div >
+
+                            <div class="detalle-total-pago margin-bottom-16">
+                                <div>
+                                    Total de pago
+                                </div>
+                                <div>
+                                    ${{sumTotal()| number}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="seleccion-operacion-exitosa" *ngIf="isPagoFinished">
+                    <div class="seleccion_transaccion-exitosa">
+                        <div class="surtidor"><img src="../../../assets/surtidor.svg" /></div>
+                        <h2 class="seleccion_transaccion-exitosa-titulo margin-bottom-24 margin-top-16"> ¡Transacción exitosa! </h2>
+                        
+                        <!-- <div class="atendedor">
+                            <div class="atendedor-wrapper">
+                                <button mat-fab aria-label="Llamar atendedor" class="atendedor-button" disabled>
+                                    <img src="../../../assets/atendedor.svg" />
+                                </button>
+                                <div class="atendedor-text">¿Necesitas ayuda?</div>
+                            </div>
+                        </div> -->
+                        
+                        <div class="transaccion-exitosa-bajo-img">
+                            <div>Ahora puedes comenzar con la carga, sigue los siguientes pasos.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <app-help-button (buttonFunction)="assistanceNotification()"></app-help-button>
+            </mat-step>
+
+
+            <!-- ------------------ index[3]: carga ------------------ -->
+            <mat-step [stepControl]="cuartoPaso" *ngIf="!showAlert;">
+                <ng-template matStepLabel>Carga</ng-template>
+                <div class="seleccion-productos-list" *ngIf="!isCargaFinished">
+                    <h2 class="seleccion-title">Sigue los siguientes pasos</h2>
+
+                    <div class="message-card-list">
+                        <div class="message-card">
+                            <div class="numero-pasos">1</div>
+                            <div class="square">
+                                <mat-grid-list cols="7" rowHeight="4.5rem">
+                                    <mat-grid-tile colspan="5" class="message-content justify-content-flex-start" >
+                                        Asegúrate de retirar la tapa <br>del estanque de tu auto.
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="seccion-icon img-paso-1">
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+
+                        <div class="message-card">
+                            <div class="numero-pasos">2</div>
+                            <div class="square">
+                                <mat-grid-list cols="7" rowHeight="4.5rem">
+                                    <mat-grid-tile colspan="5" class="message-content" >
+                                        Retira la pistola e introdúcela en el estanque.
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="seccion-icon img-paso-2">
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+
+                        <div class="message-card">
+                            <div class="numero-pasos">3</div>
+                            <div class="square">
+                                <mat-grid-list cols="7" rowHeight="4.5rem">
+                                    <mat-grid-tile colspan="5" class="message-content justify-content-flex-start" >
+                                        Presiona el botón del <br>producto a cargar.
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="seccion-icon img-paso-3">
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+
+                        <div class="message-card">
+                            <div class="numero-pasos">4</div>
+                            <div class="square">
+                                <mat-grid-list cols="7" rowHeight="4.5rem">
+                                    <mat-grid-tile colspan="5" class="message-content justify-content-flex-start" >
+                                        Comienza la carga gatillando <br> la palanca de la pistola.
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="seccion-icon img-paso-4">
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+
+                        <div class="message-card">
+                            <div class="numero-pasos">5</div>
+                            <div class="square">
+                                <mat-grid-list cols="7" rowHeight="4.5rem">
+                                    <mat-grid-tile colspan="5" class="message-content justify-content-flex-start" >
+                                        Al finalizar asegúrate de <br>colgar la pistola.
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan="2" class="seccion-icon img-paso-5">
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+
+                        <div class="square-warn">
+                            <div>
+                                <div class="icono">
+                                    <!--<div class="exclamacion">!</div>-->
+                                    <img height="26px" src='../../../assets/error.svg' />
+                                </div>
+                            </div>
+                            <div>Por tu seguridad, no uses tu celular mientras realizas la carga.</div>
+                        </div>
+                    </div>
+                    
+                    <app-help-button (buttonFunction)="assistanceNotification()"></app-help-button>
+                </div>
+
+                <div class="seleccion-productos-list" *ngIf="isCargaFinished">
+                    <div class="carga-lista seleccion_transaccion-exitosa">
+                        <div class="carga-lista-circulo">
+                            <mat-icon class="iconcargarlista">done</mat-icon>
+                        </div>
+                        <div class="carga-lista-texto">¡Tu carga ya está lista!</div>
+                    </div>
+                </div>
+            </mat-step>
+
+
+            <!-- ------------------ index[4]: listo ------------------ -->
+            <mat-step [stepControl]="quintoPaso" *ngIf="!showAlert">
+                <ng-template matStepLabel>Listo</ng-template>
+                <div class="contenido-principal div-center margin-top-24">
+                    <h3 class="seleccion__titulo-step-4">Resumen de compra</h3>
+
+                    <div class="seleccion__resumen-carga">
+                        <mat-grid-list cols="2" rowHeight="1.5rem">
+                            <mat-grid-tile class="seleccion__step-4-titulo-resumen">Monto Cargado</mat-grid-tile>
+                            <mat-grid-tile class="seleccion__step-4-titulo-resumen">Litros</mat-grid-tile>
+                        </mat-grid-list>
+                        <mat-grid-list cols="2" rowHeight="1.5rem">
+                            <mat-grid-tile class="seleccion__step-4-totales-resumen">${{montoCargado | number}}</mat-grid-tile>
+                            <mat-grid-tile class="seleccion__step-4-totales-resumen seleccion__step-4-border-leff-color">{{litros}}</mat-grid-tile>
+                        </mat-grid-list>
+                    </div>
+                </div>
+                <hr class="separador margin-top-24 margin-bottom-24">
+                <div class="contenido-principal div-center">
+                    <!-- venta en cero -->
+                    <div *ngIf="isVentaEnCero" class="venta-en-cero">
+                        <div class="venta-en-cero-text">Estamos reversando el monto pagado a tu medio de pago.</div>
+                        <div class="venta-en-cero-number">${{vuelto | number}}</div>
+                    </div>
+                    <!-- venta normal -->
+                </div>
+                <hr class="separador margin-top-24" *ngIf="isVentaEnCero">
+                <div class="contenido-principal div-center seleccion__vuelto" *ngIf="(vuelto != '0' && vuelto !== '') && !isVentaEnCero">
+                    <h3 class="titulo-step-4-vuelto">¡Tienes un vuelto!</h3>
+                    <div class="seleccion__vuelto-monto">
+                        <div class="step-4-monto">${{vuelto | number}}</div>
+                    </div>
+                    <div *ngIf="orden.mediopago !== MEDIOPAGO.CHEK">
+                        <div class="codigo-vuelto" *ngIf="codigovuelto">
+                            Código: {{codigovuelto}}
+                        </div>
+                        <div class="sugerencia-canje" *ngIf="codigovuelto">
+                            <span class="sugerencia-canje-text-info">
+                                La boleta <br>fue enviada al correo registrado
+                            </span>
+                        </div>
+                        <div style="margin-top: 6px;text-align: center;" *ngIf="(codigovuelto && completeNotificacionVuelto)">
+                            <button 
+                                style="height: min-content;"
+                                (click)="clickReclamarVueltoNotify()"
+                                [disabled]="!reclamarVueltoNotification" 
+                                mat-flat-button color="warn" 
+                                class="background-color-primary">Reclamar mi vuelto
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="orden.mediopago === MEDIOPAGO.CHEK">
+                        <div class="sugerencia-canje">
+                            <span class="sugerencia-canje-text-info">
+                                Estamos reversando el monto pagado a tu medio de pago
+                            </span>
+                        </div>
+                    </div>
+                    <div class="seccion-boton-llamar-atendedor" style="display: none;">
+                        <p class="canjear-vuelto">Para canjear tu vuelto selecciona</p>
+                        <div class="centrar-llamar-atendedor">
+                            <div class="llamar-atendedor">
+                                <mat-grid-list cols="3">
+                                    <mat-grid-tile >
+                                        <img class="atendedor-img" src="../../../assets/atendedor.svg" />
+                                    </mat-grid-tile>
+                                    <mat-grid-tile colspan='2' class="text-llamar-atendedor">
+                                        Llamar Atendedor
+                                    </mat-grid-tile>
+                                </mat-grid-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="separador margin-top-24 margin-bottom-24" *ngIf="(vuelto != '0' && vuelto !== '') && !isVentaEnCero">
+                
+                <div *ngIf="vuelto === '0' && !isVentaEnCero" class="contenido-principal div-center">
+                    <mat-grid-list cols="2" rowHeight="1.5rem" *ngIf="resumenCompra">
+                        <mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro" *ngIf="resumenCompra?.productoSeleccionado?.dspdeviceid" >Surtidor</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto" *ngIf="resumenCompra?.productoSeleccionado?.dspdeviceid">{{resumenCompra?.productoSeleccionado?.dspdeviceid }} </mat-grid-tile>
+                        
+                        <mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro" *ngIf="resumenCompra?.productoSeleccionado?.frontend_productname">Producto</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto" *ngIf="resumenCompra?.productoSeleccionado?.productname">{{resumenCompra?.productoSeleccionado?.frontend_productname}}</mat-grid-tile>
+
+                        <mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro" *ngIf="resumenCompra?.mediopago">Medio de pago</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto" *ngIf="resumenCompra?.mediopago"> {{(resumenCompra?.mediopago === 'Cash') ? 'Efectivo' : resumenCompra?.mediopago}} </mat-grid-tile>
+
+                        <mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro" *ngIf="resumenCompra?.discount">Descuento</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto" *ngIf="resumenCompra?.discount"> {{ resumenCompra?.discount}} </mat-grid-tile>
+
+                        <mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro" *ngIf="resumenCompra?.discountAlliance">Alianza</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto" *ngIf="resumenCompra?.mediopago">
+                            <span *ngIf="!offerMyClub;else sectionclubAlliance">{{ resumenCompra?.discountAlliance}}</span>
+                            <ng-template #sectionclubAlliance><span>MI CLUB</span></ng-template>
+                        </mat-grid-tile>
+
+                        <!--<mat-grid-tile class="justify-content-flex-start seleccion-sin-vuelto-texto seleccion-sin-vuelto-gris-claro">Número de boleta</mat-grid-tile>
+                        <mat-grid-tile class="justify-content-flex-end seleccion-sin-vuelto-texto">{{codigovuelto}}</mat-grid-tile>-->
+                        </mat-grid-list>
+                </div>
+                <hr class="separador margin-top-24" *ngIf="vuelto === '0' && !isVentaEnCero" >
+
+            </mat-step>
+
+        </mat-horizontal-stepper>
+    </div>
+
+
+
+
+
+
+    <!-- Footer -->
+    <div class="footer-butons contenido-principal" *ngIf="reintentarChek" style="margin-bottom: 18px;">
+        <button (click)="cancelPaymentChek()" mat-flat-button color="warn">Reintentar con otro medio de pago</button>
+    </div>
+    <div class="footer-butons contenido-principal" *ngIf="stepper?.selectedIndex == 2 && (isPagoReady && !isPagoFinished)">
+        <button (click)="clickPagar()" mat-flat-button color="warn" [disabled]="iniciarLlamadaBackend">
+            <mat-icon *ngIf="iniciarLlamadaBackend" class="icon-loading-white" ><mat-spinner diameter="20"></mat-spinner></mat-icon>
+            {{(orden.mediopago === 'Cash') ? 'Llamar atendedor' : 'Pagar'}}</button>
+    </div>
+    <div class="footer-butons contenido-principal" *ngIf="stepper?.selectedIndex == 2 && (isPagoFinished)">
+        <button (click)="clickMuestraIndicaciones()" mat-flat-button color="warn">Continuar</button>
+    </div>
+    <div class="footer-butons contenido-principal" *ngIf="stepper?.selectedIndex == 3 && isCargaFinished">
+        <button (click)="clickToBoleta()" [disabled]="isDisabledClickToBoletaButton" mat-flat-button color="warn" >Continuar</button>
+    </div>
+
+
+    <div class="footer-butons contenido-principal" *ngIf="stepper?.selectedIndex == 4"> <!-- && !isVentaEnCero -->
+        <p class="step-4-boleta margin-bottom-16" *ngIf="!isVentaEnCero" >Boleta</p>
+        <div class="step-4-enlaces-footer" *ngIf="!isVentaEnCero">
+            <mat-grid-list cols="4" rowHeight="3rem" *ngIf="clickToBoletaEnable">
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="step-4-circulo" (click)="verBoletaGoogleViewer()">
+                        <div class="step-4-circulo-align-verticar">
+                            <mat-icon class="color-white margin-top-4">save_alt</mat-icon>
+                        </div>
+                    </div>
+                    <br/>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <div class="step-4-circulo" (click)="abrirModalEnviarBoletaCorreo()">
+                        <div class="step-4-circulo-align-verticar">
+                            <mat-icon svgIcon="enviar" class="margin-top-4 margin-left-1"></mat-icon>
+                        </div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+            </mat-grid-list>
+           
+            <mat-grid-list cols="4" rowHeight="2rem" *ngIf="clickToBoletaEnable">
+                <mat-grid-tile></mat-grid-tile>
+                <mat-grid-tile class="text-seccion-boleta" (click)="verBoletaGoogleViewer()">Ver</mat-grid-tile>
+                <mat-grid-tile class="text-seccion-boleta cursor-pointer" (click)="abrirModalEnviarBoletaCorreo()">Enviar</mat-grid-tile>
+                <mat-grid-tile></mat-grid-tile>
+            </mat-grid-list>
+          
+        </div>
+        <button (click)="clickEnd()" [disabled]="orden.mediopago == 'Cash' && (vuelto !== '0' && vuelto !== '') && !confirmacionVuelto" mat-flat-button color="warn" class="background-color-primary" >Continuar</button>
+    </div>
+</div>

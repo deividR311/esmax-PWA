@@ -1,0 +1,27 @@
+.titulo-cambiar-correo {
+    padding-top: 20px;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #000000;
+}
+
+.padding-top-0{
+    padding-top: 0px;
+}
+.padding-top-20{
+    padding-top: 20px;
+}
+.cambiar-correo label{
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    /* identical to box height, or 114% */
+    letter-spacing: 0.25px;
+    color: #757878;
+}

@@ -1,0 +1,92 @@
+<div class="inicio-content" *ngIf="!showAlertError; else showErrorDiv">
+    <div class="menu-inferior" [@Nike]>
+        <!--<div class="bajo-hola"></div>-->
+        <div class="menu-inferior-contenido">
+            <div class="width-85 div-center">
+                <span class="hola">Hola!</span>
+                <div class="eess"><img src="../../../assets/map-pin-2-line.svg" /> {{getNombreFantasia()}}</div>
+                <div class="line-wrapper">
+                    <div class="line"></div>
+                </div>
+                <div class="app-version">{{version}}</div>
+            </div>
+
+            <div class="home-buttons">
+        
+                <button mat-flat-button color="warn" (click)="gotoLogin()" [disabled]="!isready">
+                    <p *ngIf="qr" class="home-text-button">Inicia sesión y carga</p>
+                    <p *ngIf="!qr" class="home-text-button">Inicia sesión</p>
+                </button>
+                
+                <button mat-flat-button color="warn" (click)="gotoRegistro()" [disabled]="!isready">
+                    <p *ngIf="qr" class="home-text-button">Regístrate y carga</p>
+                    <p *ngIf="!qr" class="home-text-button">Regístrate</p>
+                </button>
+                
+                <button mat-flat-button color="warn" (click)="gotoSeleccion()" [disabled]="!isready" *ngIf="qr"> 
+                    <p class="home-text-button">Carga sin registrarte</p>
+                </button>
+
+                <div id="separador-acceso-remoto" *ngIf="!qr">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #showErrorDiv>
+    <div class="interior-content">
+        <div class="showError-wrapper">
+            <img src='../../../assets/error.svg' />
+            <h2>{{showAlertErrorTitle}}</h2>
+            <div class="app-version">{{version}}</div>
+            <div class="error-mensage">{{showAlertErrorMessage}}</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * Contenido state pospoused * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- INICIADO 
+<div *ngIf="status === statusEnum.INICIADO" class="text-success">
+    <h2>Bienvenido - Debe iniciar al cámara y escanear qr</h2>
+    <p>status: <code>{{status}}</code></p>
+</div>-->
+
+<!-- SELECCIONANDO 
+<div *ngIf="status === statusEnum.SELECCIONANDO" class="text-success">
+    <p>status: <code>{{status}}</code></p>
+    <form (ngSubmit)="seleccionandoOnSubmit()">
+    <p>
+        <label>Producto:</label>
+        <input type="text" required>
+    </p>
+    <p>
+        <label>Monto:</label>
+        <input type="text"  required>
+    </p>
+    <p>
+        <button type="submit" >Submit</button>
+    </p> 
+    </form>
+</div>-->
+
+<!-- PAGANDO 
+<div *ngIf="status === statusEnum.PAGANDO" class="text-success">
+    <h2>Bienvenido - comienzo</h2>
+    <p>status: <code>{{status}}</code></p>
+</div>-->
+
+<!-- CARGANDO 
+<div *ngIf="status === statusEnum.CARGANDO" class="text-success">
+    <h2>Bienvenido - comienzo</h2>
+    <p>status: <code>{{status}}</code></p>
+</div>-->
+
+<!-- TERMINADO 
+<div *ngIf="status === statusEnum.TERMINADO" class="text-success">
+    <h2>Bienvenido - comienzo</h2>
+    <p>status: <code>{{status}}</code></p>
+</div>-->

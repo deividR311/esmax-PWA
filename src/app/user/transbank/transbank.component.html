@@ -1,0 +1,42 @@
+<div class="interior-content">
+    <div class="seleccion-productos-list contenido-principal">
+        <h1 class="transbanck__title">Medios de pago</h1>
+        <h3 class="transbanck__subtitle">Mis tarjetas</h3>
+    </div>
+    <hr class="hr-separador">
+    <div class="seleccion-productos-list contenido-principal margin-top-32">
+        <mat-grid-list cols="10" rowHeight="4rem" class="width-100 transbanck__list-medio-pago" *ngFor="let item of list; let i = index" [ngClass]="{'transbanck__list-medio-pago-checked': item.status === 'OKDEFAULT'}">
+            <mat-grid-tile colspan="2" class="justify-content-flex-start">
+                <mat-icon class="margin-left-16 transbanck__card-checked cursor-pointer" *ngIf="item.status === 'OKDEFAULT' " (click)=setFav(i)>radio_button_checked</mat-icon>
+                <mat-icon class="margin-left-16 transbanck__card-unchecked cursor-pointer" *ngIf="item.status !== 'OKDEFAULT' " (click)=setFav(i)>radio_button_unchecked</mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile [ngSwitch]="item.cardtype" class="justify-content-flex-start">
+                <mat-icon class="type-card" svgIcon="americanexpress" *ngSwitchCase="'AmericanExpress'"></mat-icon>
+                <mat-icon class="type-card" svgIcon="visa" *ngSwitchCase="'Visa'"></mat-icon>
+                <mat-icon class="type-card" svgIcon="redcompra" *ngSwitchCase="'RedCompra'"></mat-icon>
+                <mat-icon class="type-card" svgIcon="mastercard" *ngSwitchCase="'Mastercard'"></mat-icon>
+                <mat-icon class="type-card" svgIcon="magna" *ngSwitchCase="'Magna'"></mat-icon>
+                <mat-icon class="type-card" svgIcon="card-default" *ngSwitchDefault></mat-icon>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="6" class="justify-content-flex-start">
+                <div class="margin-left-16">
+                    <span class="transbanck__card-type"> {{item.cardtype}} </span>
+                    <span class="transbanck__card-number">&#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; {{item.cardnumber}}</span>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile >
+                <div class="margin-right-16">
+                    <mat-icon class="transbanck__card-delete cursor-pointer" (click)=setDel(i)>delete</mat-icon>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <div *ngIf="!cardExist() && isDataLoaded" class="transbanck__sin-tarjeta">
+            <h3>No tienes tarjetas registradas</h3>
+            <p>Para realizar pagos debes agregar tu tarjeta de crédito o débito.</p>
+        </div>
+        <div class="transbanck__registrar-tarjeta" *ngIf="isDataLoaded">
+            <a (click)="inscribirTarjeta()">+ Agregar <span *ngIf="cardExist()">otra</span> tarjeta</a>
+        </div>
+    </div>
+</div>

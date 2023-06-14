@@ -1,0 +1,9 @@
+.centrado{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.toolbar-buttons, .toolbar{
+  visibility: hidden !important;
+}

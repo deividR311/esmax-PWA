@@ -1,0 +1,28 @@
+.titulo-cambiar-clave {
+    padding-top: 20px;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #000000;
+}
+
+
+.cambiar-clave__label {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    color: #757878;
+}
+.cambiar-clave__titulo-margin-botton {
+    margin-bottom: 48px;
+}
+.ojo-gris {
+    opacity: 0.4;
+    color: #231F20;
+}

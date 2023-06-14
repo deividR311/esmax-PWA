@@ -1,0 +1,8 @@
+.alert-no-window-ctn {
+    text-align: center;
+}
+
+.alert-no-window-btn {
+    background: var(--verde-petrobras);
+    color: white;
+}

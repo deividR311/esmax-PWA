@@ -1,0 +1,21 @@
+<h1 mat-dialog-title><h2 [class]="(data.isError) ? 'dialog-error' : 'dialog-title'"><strong>{{ data.title }}</strong></h2></h1>
+<div mat-dialog-content>
+  <form [formGroup]="formLogin" (keyup.enter)="verificar()">
+    <p *ngIf="discounts;else not_discounts" class="dialog-description">{{data.description}}</p>
+    <ng-template #not_discounts><p class="dialog-description">Hemos validado tu RUT. No tienes ningún descuento disponible. Conoce los beneficios en nuestro <a href="https://www.petrobrasdistribucion.cl/promociones/beneficios-combustible/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; font-weight: bold;">sitio web</a>.</p></ng-template>
+    <mat-form-field appearance="fill" class="fld">
+      <input appRut matInput type="text" formControlName="usuario" name="usuario" id="usuario" placeholder="Ingresa tu RUT" class="inp">
+      <mat-error *ngIf="hasRutError('usuario', 'required')">Ingresa tu RUT</mat-error>
+      <mat-error *ngIf="hasRutError('usuario', 'rutValidator') && !hasRutError('usuario', 'required')">Formato invalido</mat-error>
+      <mat-icon matPrefix class="my-icon">edit</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions style="margin-top: 2px;">
+  <button mat-stroked-button style="width: 44% !important;" (click)="closeDialog()">Volver</button>
+  &nbsp;
+  <button mat-button class="dialog-btn" style="width: 44% !important;" cdkFocusInitial (click)="verificar()">{{ data.buttonsubmit }}</button>
+  <br/>
+  <br/>
+  <a href="javascript:void(0);" class="center dialog-not-discount" style="text-decoration: none;" (click)="closeDialogNotDiscount()">Quiero avanzar sin descuento</a>
+</div>

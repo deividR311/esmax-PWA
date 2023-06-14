@@ -1,0 +1,18 @@
+<div class="toolbar-pdf">
+       <img id="logo" alt="Petrobras-logo" src="../assets/logo.svg" />
+       <!-- <div class="texto-ubicacion">Descargar boleta <a href="{{this.pdfSrc}}"><mat-icon class="icon-ubicacion">save_alt</mat-icon></a> </div> -->
+       <div class="texto-1" *ngIf="isPollingAlive" >Estamos generando tu boleta.</div>
+</div>
+<mat-progress-spinner class="spinner-pdf" [color]="color" [mode]="mode" [value]="value" *ngIf="isPollingAlive"></mat-progress-spinner>
+
+<!--  <pdf-viewer [src]="pdfSrc"  [show-all]="false" [autoresize]="true" [original-size]='true'
+        [fit-to-page]='true' [render-text]='false'></pdf-viewer>   -->
+
+<!-- <h2 mat-dialog-title>Su boleta será descargada.</h2>
+<h3 mat-dialog-title>¡Gracias por preferirnos!</h3>  -->
+
+<iframe id='iFrame' #iFrame [src]="iFrameUrl" (load)="iframeOnLoad($event)" style='width:90%; height:450px'
+       frameborder='2'>
+</iframe>
+<!-- 
+<div #iframeContainer style='width:95vw; height:95vh; background-color: antiquewhite'  frameborder='0'></div>-->

@@ -1,0 +1,185 @@
+/*@media only screen and (max-width: 600px) {
+  .seccion-form{
+    width: 90% !important;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}*/
+
+
+.seccion-form{
+  width: 100%;
+}
+.interior-content{
+  max-width: 500px;
+}
+.titulo-evalua {
+  padding-top: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: -0.41px;
+  margin: 0px;
+}
+
+.evalua-experiencia span.star{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+span.leyenda {
+  text-align: center;
+  width: 63px;
+  display: inline-block;
+}
+span.estrella-leyenda {
+  font-family: Trebuchet MS;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 180%;
+  /* identical to box height, or 22px */
+
+  text-align: center;
+  letter-spacing: 0.309094px;
+}
+
+.align-end{
+  text-align: end !important;
+}
+.align-start{
+  text-align: start !important;
+}
+.vertical-align{
+  vertical-align: middle;
+}
+.margin-top-30{
+  margin-top: 30px;
+}
+.margin-top-50{
+  margin-top: 50px;
+}
+.padding-left-5{
+  padding-left: 5px;
+}
+.no-resize{
+  resize: none !important;
+}
+.label-textarea{
+  font-family: Trebuchet MS;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.41px;
+}
+.evalua-experiencia .pregunta {
+  margin-bottom: 24px;
+  font-family: Trebuchet MS;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: -0.41px;
+}
+
+.evalua-experiencia .container-opciones .opcion{
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100px;
+  height: 32px;
+  left: 194px;
+  top: 359px;
+  border: 1px solid var(--verde-medio);
+  box-sizing: border-box;
+  border-radius: 50px;
+  text-align: center;
+  font-family: Trebuchet MS;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  color: #757878;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
+}
+.evalua-experiencia .container-opciones .opcion-seleccionada {
+  color: white;
+  background-color: #008542;
+}
+.container-opciones {
+  text-align: center;
+}
+.text-align-center{
+  text-align: center;
+}
+
+.full-width-field {
+  width: 100%;
+}
+
+/* para ocultar las opciones del stepper */
+.evalua-experiencia .mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* estrellas no seleccionadas*/
+.evalua-experiencia label.star.ng-star-inserted {
+  color: var(--verde-petrobras) !important;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* estrellas seleccionadas*/
+.evalua-experiencia input.star:checked ~ label.star:before {
+  color: var(--verde-petrobras) !important;
+}
+
+/* remover el sombreado, al cliente no le gusta*/
+.evalua-experiencia input.star:checked ~ label.star:before {
+  text-shadow: none !important;
+}
+.margin-top-16 {
+  margin-top: 16px !important;
+}
+.margin-bottom-64 {
+  margin-bottom: 64px;
+}
+.evalua-comentario {
+  font-family: Trebuchet MS;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 180%;
+  letter-spacing: 0.5px;
+  color: var(--ceniza-claro);
+}
+.height-90 .mat-form-field-infix {
+  height: 90px !important;
+}
+@media screen and (max-width: 390px) {
+  .evalua-experiencia label.star.ng-star-inserted {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  span.leyenda {
+    width: 59px !important;
+  }
+}

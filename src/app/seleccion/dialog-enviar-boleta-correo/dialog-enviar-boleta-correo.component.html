@@ -1,0 +1,51 @@
+<div class="interior-content">
+    <div class="contenido">
+        <mat-grid-list cols="6" rowHeight="2rem">
+            <mat-grid-tile colspan="5" class="justify-content-end">
+                <h2 class="titulo text-align-left" *ngIf="!correoEnviado">Enviar Boleta</h2>
+            </mat-grid-tile>
+            <mat-grid-tile class="enviar-boleta-correo-x">
+                <mat-icon aria-hidden="false" class="cerrar-modal cursor-pointer" aria-label="Cerrar" (click)="cerrar()" >close</mat-icon>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <p class="descripcion">
+            <span *ngIf="!correoEnviado">
+                Ingresa tu correo electrónico para recibir tu boleta.
+            </span>
+        </p>
+        <div>
+            <form *ngIf="form && !correoEnviado" [formGroup]="form" class="enviar-boleta-correo-form">
+                <p>
+                    <label class="dialog-enviar-boleta-correo__label">Ingresa tu correo electrónico</label><br>
+                    <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                        <input matInput placeholder="Ingresa tu correo electrónico" formControlName="email" id="email" required maxlength="50" autocomplete="off" oninput="this.value = this.value.toLowerCase().trim()">
+                        <mat-error *ngIf="form.controls.email.hasError('required')">El correo es requerido</mat-error>
+                        <mat-error *ngIf="form.controls.email.hasError('pattern')">Debe ingresar un correo válido</mat-error>
+                    </mat-form-field>
+                </p>
+            </form>
+            
+            <div class="enviar-boleta-correo-exitoso" *ngIf="correoEnviado">
+                <div class="padding-top-20">
+                    <div class="circulo-59" >
+                    <mat-icon class="boton-check-circulo">done</mat-icon>
+                    </div>
+                    <p class="enviar-boleta-correo-detalle-listo" >
+                        ¡Tu boleta se ha enviado <br>con éxito!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer-butons div-center">
+    <button *ngIf="!correoEnviado" mat-flat-button color="warn" [disabled]="form.invalid || iniciarLlamadaBackend" (click)="enviarBoleta()" >
+        <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20">
+        </mat-spinner></mat-icon>
+        Enviar Boleta
+    </button>
+    <button *ngIf="correoEnviado" mat-flat-button color="warn" (click)="cerrar()">
+        Aceptar
+    </button>
+</div>

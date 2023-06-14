@@ -1,0 +1,18 @@
+<div class="app-dialog-confirm">
+    <div class="contenido-principal div-center margin-top-60">
+        <div class="div-imagen text-align-center">
+            <img src='../../../assets/exclamacion-naranja.svg' />
+        </div>
+        <div class="pregunta margin-top-20">
+            <span [innerHTML]="pregunta"></span>
+        </div>
+        <div class="footer-button-cerrar">
+            <div class="margin-button-cancelar">
+                <button  mat-stroked-button color='transparent'class="cancelar-cierre" (click)="cerrar(false)">{{textoBotonCancelar}}</button>
+            </div>
+            <div class="margin-button-aceptar">
+                <button mat-flat-button class="confirmar-cierre" (click)="cerrar(true)">{{textoBotonAceptar}}</button>
+            </div>
+        </div>
+    </div>
+</div>

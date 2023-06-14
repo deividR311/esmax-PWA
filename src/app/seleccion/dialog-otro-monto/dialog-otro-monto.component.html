@@ -1,0 +1,34 @@
+<div class="interior-content">
+    <div class="contenido">
+        <mat-grid-list cols="9" rowHeight="2.7rem">
+            <mat-grid-tile></mat-grid-tile>
+            <mat-grid-tile colspan="7" class="justify-content-end">
+                <h2 class="otro-monto__titulo">Ingresa tu monto a cargar</h2>
+            </mat-grid-tile>
+            <mat-grid-tile class="enviar-boleta-correo-x">
+                <mat-icon aria-hidden="false" class="cerrar-modal cursor-pointer" aria-label="Cerrar" (click)="cerrar()" >close</mat-icon>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <div>
+            <form *ngIf="form" [formGroup]="form" class="dialog-otro-monto-form">
+                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                    <input matInput placeholder="0" formControlName="otro_monto" id="otro_monto" required maxlength="10" autocomplete="off">
+                    <span matPrefix >$&nbsp; </span>
+                    <mat-error *ngIf="form.controls.otro_monto.hasError('required')">El correo es requerido</mat-error>
+                    <mat-error *ngIf="form.controls.otro_monto.hasError('pattern')">Debe ingresar un correo válido</mat-error>
+                </mat-form-field>
+            </form>
+            <div>
+                <ul class="lista-validaciones-general" [ngClass]="{'opacidad-media': !form.valid,'lista-validada': form.valid}">
+                    <li class="text-align-left">Tu contraseña debe tener 4 números</li>
+                    <li class="text-align-left">Sin espacios</li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-butons">
+    <button  mat-flat-button color="warn" [disabled]="form.invalid">
+        Continuar
+    </button>
+</div>

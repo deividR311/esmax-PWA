@@ -1,0 +1,66 @@
+<div class="interior-content contenido-principal">
+    <div class="width-100 cambiar-clave__titulo-margin-botton">
+        <h1 class="titulo-cambiar-clave mat-headline ">Cambiar contraseña</h1>
+    </div>
+    <form *ngIf="form" [formGroup]="form" (keyup.enter)="cambiarClave()" class="width-100">
+        <p>
+            <label class="cambiar-clave__label">Contraseña actual </label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                <input matInput placeholder="Ingresa tu contraseña actual" formControlName="clave" id="clave" required maxlength="4"
+                [type]="hide ? 'password' : 'tel'" autocomplete="off">
+            <mat-error *ngIf="form.controls.clave.hasError('required')">Debes ingresar tu contraseña</mat-error>
+            <mat-error *ngIf="form.controls.clave.hasError('pattern')">Error de formato</mat-error>
+            <mat-error *ngIf="form.controls.clave.hasError('minlength')">Tu contraseña debe tener 4 dígitos</mat-error>
+            <mat-error *ngIf="form.controls.clave.hasError('claveIncorrecta')">Contraseña incorrecta</mat-error>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" class="text-align-left">
+                <mat-icon class="grey-color opacidad-media">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <label class="cambiar-clave__label">Nueva contraseña</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                <input matInput placeholder="Nueva contraseña" formControlName="nuevaClave" id="nuevaClave" required maxlength="4"
+                [type]="hide ? 'password' : 'tel'" autocomplete="off">
+            <mat-error *ngIf="form.controls.nuevaClave.hasError('required')">Debes ingresar tu nueva contraseña</mat-error>
+            <mat-error *ngIf="form.controls.nuevaClave.hasError('pattern')">Error de formato</mat-error>
+            <mat-error *ngIf="form.controls.nuevaClave.hasError('minlength')">Tu contraseña debe tener 4 dígitos</mat-error>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" class="text-align-left">
+                <mat-icon class="grey-color opacidad-media">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+        </p>
+
+        <p class="margin-bottom-0">
+            <label class="cambiar-clave__label">Confirmar contraseña</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                <input matInput placeholder="Confirma tu nueva contraseña" formControlName="confirmClave" id="confirmClave" required maxlength="4"
+                [type]="hide ? 'password' : 'tel'" autocomplete="off">
+            <mat-error *ngIf="form.controls.confirmClave.hasError('required')">Debes confirmar tu nueva contraseña</mat-error>
+            <mat-error *ngIf="form.controls.confirmClave.hasError('pattern')">Error de formato</mat-error>
+            <mat-error *ngIf="form.controls.confirmClave.hasError('minlength')">Tu contraseña debe tener 4 dígitos</mat-error>
+            <mat-error *ngIf="form.controls.confirmClave.hasError('mustMatch')">Tu contraseña debe coincidir con la anterior</mat-error>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" class="text-align-left">
+                <mat-icon class="grey-color opacidad-media">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+        </p>
+    </form>
+    <ul class="lista-validaciones margin-top-0 margin-bottom-60 width-100" [ngClass]="{'opacidad-media': !form.valid,'lista-validada': form.valid}">
+        <li>Tu contraseña debe tener 4 números</li>
+        <li>Sin espacios</li>
+    </ul>
+</div>
+
+
+<div class="footer-butons contenido-principal">
+    <button mat-flat-button color="warn" [disabled]="form.invalid || iniciarLlamadaBackend" (click)="cambiarClave()" >
+        <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20">
+        </mat-spinner></mat-icon>
+        Guardar
+    </button>
+</div>

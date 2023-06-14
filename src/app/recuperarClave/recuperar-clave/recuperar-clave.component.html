@@ -1,0 +1,174 @@
+<div class="interior-content recuperar-clave contenido-principal">
+  <div class="contenido" [ngClass]="{'centrado-horizontal':secciones.LISTO===step}">
+    <div class="esmax-stepper">
+      <mat-horizontal-stepper linear labelPosition="bottom" #stepper class="step-recuperar-clave">
+        <!-- ------------------ inicio paso INGRESA_RUT ------------------ -->
+        <mat-step [stepControl]="formConsultaRut">
+        <h1 class="recuperar-titulo mat-headline text-align-left">Recupera tu contraseña</h1>
+        <p class="recuperar-subtitulo text-align-left">Ingresa tu RUT para crear tu nueva clave</p>
+        <form *ngIf="formConsultaRut" [formGroup]="formConsultaRut">
+          <p class="padding-top-20 text-align-left">
+            <label class="text-align-left">Ingresa tu RUT</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="full-width-field padding-top-0">
+              <input appRut matInput type="text" formControlName="rut" name="rut" formatRut id="rut" placeholder="Ingresa tu RUT" autocomplete="off" (input)="rutNoEncontrado = false" autofocus >
+              <mat-error *ngIf="hasRutError('rut', 'required')">El RUT es requerido</mat-error>
+              <mat-error *ngIf="hasRutError('rut', 'rutValidator')">El RUT no es correcto</mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="rutNoEncontrado" >RUT no encontrado </mat-error>
+          </p>
+        </form>
+      </mat-step>
+      <!-- -------------------- fin paso INGRESA_RUT ------------------- -->
+      <!-- ------------------ inicio paso ENVIO_DE_CODIGO ------------------ -->
+      <mat-step >
+        <form *ngIf="formEnviarCodigo" [formGroup]="formEnviarCodigo">
+          <ng-template matStepLabel>Recupera tu contraseña</ng-template>
+          <div class="validacion">
+            <h1 class="recuperar-titulo mat-headline text-align-left">Recupera tu contraseña</h1>
+              <h3>Selecciona la forma en que quieres recuperar tu contraseña</h3>
+              <div class="validacion">
+                  <p>
+                      <button class="validation-button width-100" [ngClass]="{selected:formEnviarCodigo.controls['opcion_envio'].value === 'SMS'}" (click)="changeMode('SMS')"
+                          mat-stroked-button>
+                          <table mat-table *ngIf="user" class="tabla-opcion">
+                            <tr>
+                              <td class="width-24">
+                                  <img src="../../../assets/sms.svg" alt="" class="vertical-align-middle">
+                              </td>
+                              <td class="padding-left-16">
+                                  <div class="text-align-left titulo-boton-opcion-envio">Enviar código por SMS:</div>
+                                  <div class="text-align-left negrita texto-boton-opcion-envio">{{user.telefono}}</div>
+                              </td>
+                              <td style="text-align:right">
+                                <mat-icon *ngIf="formEnviarCodigo.controls['opcion_envio'].value !== 'SMS'" class="mat-22 grisOscuro vertical-align-middle">check_circle_outline</mat-icon>
+                                <mat-icon *ngIf="formEnviarCodigo.controls['opcion_envio'].value === 'SMS'" class="mat-22 verde vertical-align-middle">check_circle</mat-icon>
+                              </td>
+                            </tr>
+                          </table>
+                      </button>
+                      <mat-error *ngIf="codigoNoEnviado" >Código no Enviado, verique sus datos </mat-error>
+                  </p>
+              </div>
+              <div class="validacion">
+                  <p>
+                      <button class="validation-button width-100" [ngClass]="{selected:formEnviarCodigo.controls['opcion_envio'].value === 'MAIL' }" (click)="changeMode('MAIL')" mat-stroked-button>
+                          <table mat-table *ngIf="user" class=" tabla-opcion">
+                            <tr>
+                              <td class="width-24">
+                                  <mat-icon class="mat-18 grisOscuro vertical-align-middle">mail_outline</mat-icon>
+                                  <!-- <img src="../../../assets/mail.svg" alt=""> -->
+                              </td>
+                              <td class="padding-left-16">
+                                  <div class="text-align-left titulo-boton-opcion-envio">Enviar código por correo:</div>
+                                  <div class="text-align-left negrita texto-boton-opcion-envio">{{user.email}}</div>
+                              </td>
+                              <td style="text-align:right">
+                                  <mat-icon *ngIf="formEnviarCodigo.controls['opcion_envio'].value !== 'MAIL'" class="mat-22 grisOscuro vertical-align-middle">check_circle_outline</mat-icon>
+                                  <mat-icon *ngIf="formEnviarCodigo.controls['opcion_envio'].value === 'MAIL'" class="mat-22 verde vertical-align-middle">check_circle</mat-icon>
+                              </td>
+                            </tr>
+                          </table>
+                      </button>
+                  </p>
+              </div>
+          </div>
+        </form>
+      </mat-step>
+      <!-- -------------------- fin paso ENVIO_DE_CODIGO ------------------- -->
+      <!-- ------------------ inicio paso NUEVA_CLAVE ------------------ -->
+      <mat-step >
+        <h1 class="recuperar-titulo mat-headline text-align-left">Recupera tu contraseña</h1>
+        <p class="recuperar-subtitulo margin-bottom-32 text-align-left" *ngIf="user">
+          Ingresa el código de 4 dígitos enviado al 
+          <span *ngIf="formEnviarCodigo.controls['opcion_envio'].value === 'MAIL'">correo <span class="negrita">{{user.email}}</span></span>
+          <span *ngIf="formEnviarCodigo.controls['opcion_envio'].value === 'SMS'">número <span class="negrita">{{user.telefono}}</span></span>
+          para validar tu cuenta.
+        </p>
+        <form *ngIf="formNuevaClave" [formGroup]="formNuevaClave" autocomplete="off">
+          <label>Código de verificación</label> <br>
+          <mat-form-field floatLabel="always" appearance="outline" class="full-width-field padding-top-0 margin-bottom-8">
+            <input matInput type="text" formControlName="codigo_verificacion" name="codigo_verificacion" id="codigo_verificacion" maxlength="4" (input)="codigosNoCoinciden = false" placeholder="Ingresar código">
+            <mat-error *ngIf="formNuevaClave.controls.codigo_verificacion.hasError('required')">El código es requerido</mat-error>
+            <mat-error *ngIf="formNuevaClave.controls.codigo_verificacion.hasError('pattern')">El código solo acepta números</mat-error>
+            <mat-error *ngIf="formNuevaClave.controls.codigo_verificacion.hasError('minlength')">Debe contener 4 caracteres</mat-error>
+          </mat-form-field>
+          <mat-error *ngIf="codigosNoCoinciden" >Código no válido </mat-error>
+          <p class="margin-bottom-0">
+            <label>Nueva contraseña</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="full-width-field padding-top-0 margin-bottom-8">
+                <input matInput placeholder="Nueva contraseña" formControlName="clave" id="clave" required maxlength="4"
+                    [type]="hide ? 'password' : 'tel'" autocomplete="off">
+                <mat-error *ngIf="formNuevaClave.controls.clave.hasError('required')">La Clave es requerida</mat-error>
+                <mat-error *ngIf="formNuevaClave.controls.clave.hasError('pattern')">La clave solo acepta números</mat-error>
+                <mat-error *ngIf="formNuevaClave.controls.clave.hasError('minlength')">Debe contener 4 caracteres</mat-error>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="grey-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+          </p>
+
+          <p class="margin-top-0 margin-bottom-0">
+            <label>Confirma tu nueva contraseña </label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="full-width-field padding-top-0 margin-bottom-8">
+                <input matInput placeholder="Confirma tu nueva contraseña" formControlName="clave2" id="clave2" required
+                    maxlength="4" [type]="hide ? 'password' : 'tel'" autocomplete="off" >
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="grey-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+
+            </mat-form-field>
+          </p>
+          <div>
+            <ul class="lista-validaciones" [ngClass]="{'opacidad-media': !formNuevaClave.valid,'lista-validada': formNuevaClave.valid}">
+              <li>Tu contraseña debe tener 4 números</li>
+              <li>Sin espacios</li>
+            </ul>
+        </div>
+
+          <!-- inicio seccion para reenvio de codigo -->
+          <div align="center" *ngIf="mostrarCrono">
+            <p>
+              <b class="verde">Reenviar código en 
+                <app-cronometro-decremento [iniciar]="mostrarCrono" (finCronometro)="finalizoCronometro()" ></app-cronometro-decremento>
+              </b>
+            </p>
+          </div>
+          <div align="right" *ngIf="!mostrarCrono" class="reenviar-codigo">
+              <span class="opacidad-media">No he recibido el código,</span>
+              <p><a (click)=" enviarCodigo(true)" ><b class="color-secondary">Reenviar código ahora </b></a></p>
+          </div>
+          <!-- inicio seccion para reenvio de codigo -->
+
+        </form>
+      </mat-step>
+      <!-- -------------------- fin paso NUEVA_CLAVE ------------------- -->
+      <!-- ------------------ inicio paso LISTO ------------------ -->
+    <mat-step>
+        <div >
+          <div class="carga-lista">
+            <div class="carga-lista-circulo">
+                <mat-icon class="iconcargarlista">done</mat-icon>
+            </div>
+            <p class="negrita padding-top-20 color-negro" >¡Listo!</p>
+            <p class="opacidad-media color-negro">Tu contraseña ha sido creada con éxito</p>
+        </div>
+        </div>
+    </mat-step>
+    <!-- -------------------- fin paso LISTO ------------------- -->
+    </mat-horizontal-stepper>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+<div class="footer-butons contenido-principal" [ngSwitch]="step">
+    <button *ngSwitchCase="secciones.INGRESA_RUT"     mat-flat-button color="warn" [disabled]="formConsultaRut.invalid || iniciarLlamadaBackend" (click)="consultarRut()" ><mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon> Continuar</button>
+    <button *ngSwitchCase="secciones.ENVIO_DE_CODIGO" mat-flat-button color="warn" (click)="enviarCodigo()" [disabled]="iniciarLlamadaBackend" ><mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon> Enviar Código</button>
+    <button *ngSwitchCase="secciones.NUEVA_CLAVE"     mat-flat-button color="warn" [disabled]="formNuevaClave.invalid || iniciarLlamadaBackend" (click)="cambiarClave()" ><mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon> Cambiar Contraseña</button>
+    <button *ngSwitchCase="secciones.LISTO"           mat-flat-button color="warn" (click)="iniciarSesion()" >Iniciar Sesión</button>
+</div>

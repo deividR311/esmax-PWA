@@ -1,0 +1,8 @@
+export enum Estado {
+    INICIADO = 'INICIADO',
+    SELECCIONANDO = 'SELECCIONANDO',
+    PAGANDO = 'PAGANDO',
+    CARGANDO = 'CARGANDO',
+    TERMINADO = 'TERMINADO',
+
+}

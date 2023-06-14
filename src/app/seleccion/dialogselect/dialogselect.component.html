@@ -1,0 +1,48 @@
+<div>
+    <div class="color-ceniza text-align-right cursor-pointer">
+        <mat-icon aria-hidden="false" class="cerrar-modal" *ngIf="!isInscribiendo" aria-label="Cerrar" (click)="cerrarInscribirTarjeta()" >close</mat-icon>
+    </div>
+</div>
+<div *ngIf="cardExist()">
+    <h2 mat-dialog-title class="dialogselect__title">Medios de pago</h2>
+    <div class="dialogselect__subtitle margin-bottom-24">Mis tarjetas -{{list?.length}}-</div>
+</div>
+<div *ngIf="!cardExist()">
+    <div class="dialogselect__sin-tarjeta-titulo margin-bottom-24">No tienes tarjetas registradas</div>
+</div>
+<div>
+    <mat-grid-list cols="9" rowHeight="4rem" class="width-100 dialogselect__list-medio-pago" *ngFor="let item of list; let i = index" [ngClass]="{'dialogselect__list-medio-pago-checked': item.cardnumber === cardnumber }" (click)="onCardsChange(item)">
+        <mat-grid-tile colspan="2" class="justify-content-flex-start">
+            <mat-icon class="dialogselect__card-checked cursor-pointer padding-left-16 margin-bottom-1" *ngIf="item.cardnumber === cardnumber " >radio_button_checked</mat-icon>
+            <mat-icon class="dialogselect__card-unchecked cursor-pointer padding-left-16 margin-bottom-1" *ngIf="item.cardnumber !== cardnumber " >radio_button_unchecked</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" [ngSwitch]="item.cardtype">
+            <mat-icon class="type-card margin-bottom-1" svgIcon="americanexpress" *ngSwitchCase="'AmericanExpress'"></mat-icon>
+            <mat-icon class="type-card margin-bottom-1" svgIcon="visa" *ngSwitchCase="'Visa'"></mat-icon>
+            <mat-icon class="type-card margin-bottom-1" svgIcon="redcompra" *ngSwitchCase="'RedCompra'"></mat-icon>
+            <mat-icon class="type-card margin-bottom-1" svgIcon="mastercard" *ngSwitchCase="'Mastercard'"></mat-icon>
+            <mat-icon class="type-card margin-bottom-1" svgIcon="magna" *ngSwitchCase="'Magna'"></mat-icon>
+            <mat-icon class="type-card margin-bottom-1" svgIcon="card-default" *ngSwitchDefault></mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" class="justify-content-flex-start">
+            <div class="margin-left-16 margin-right-16">
+                <span class="dialogselect__card-type"> {{item.cardtype}} </span>
+                <span class="dialogselect__card-number">
+                    &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; {{item.cardnumber}}
+                </span>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div *ngIf="!cardExist()" class="msg-sin-tarjeta">Para realizar pagos debes agregar tu tarjeta de crédito o débito.</div>
+<div mat-dialog-actions class="dialog-actions text-align-right margin-bottom-32">
+    <!--<button *ngIf="!isInscribiendo" (click)="inscribirTarjeta()" mat-flat-button color="warn" class="float-left margin-left-0">Nueva tarjeta</button>-->
+    <a class="text-nueva-tarjeta" *ngIf="!isInscribiendo" (click)="inscribirTarjeta()"> + Agregar tarjeta</a>
+
+    <button *ngIf="isInscribiendo" (click)="cancelarInscribirTarjeta()" mat-flat-button color="primary"><mat-icon>
+        <mat-spinner color="accent" diameter="20">
+        </mat-spinner>
+    </mat-icon> Cancelar inscripción</button>
+    
+    <!--<button *ngIf="!isInscribiendo" mat-flat-button color="primary" class="dialogselect__button-close float-right margin-right-0" (click)="cerrarInscribirTarjeta()">Cerrar</button>-->
+</div>

@@ -1,0 +1,14 @@
+
+<div class="error-dialog">
+    <div class="showError-wrapper padding-wrapper">
+        <img src='../../../assets/error.svg' />
+        <h2 class="text-error">{{showAlertErrorTitle}}</h2>
+        <div class="text-error error-mensage">{{showAlertErrorMessage}}</div>
+    </div>
+</div>
+
+<div class="footer-butons div-center">
+    <button mat-flat-button color="warn" (click)="snackBarRef.dismiss()">
+        Aceptar
+    </button>
+</div>

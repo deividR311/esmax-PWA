@@ -1,0 +1,85 @@
+<!-- Loading spinner
+<div *ngIf="loading" class="loading-indicator">
+  <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="1" [diameter]="30">
+  </mat-progress-spinner>
+</div> -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * Contenido state dependand * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<!-- Toolbar -->
+<div class="toolbar-buttons" *ngIf="showCompleteHeader()">
+  <div>
+    <a (click)="backaction()" *ngIf="showButtonBack">
+      <mat-icon *ngIf="showBackArrow()" aria-hidden="false" aria-label="Atrás" class="btn-back ajuste-registro-remoto-menu-izq">keyboard_arrow_left</mat-icon>
+    </a>
+  </div>
+
+  <!-- menu  -->
+  <!--   <a (click)="logoutaction()">
+    <mat-icon *ngIf="isLoggedIn$ | async" aria-hidden="false" aria-label="Salir" class="btn-exit">exit_to_app</mat-icon>
+  </a> -->
+  <div *ngIf="showRigthIcon() && showButtonBurger">
+    <mat-icon [matMenuTriggerFor]="menu" aria-label="menu" *ngIf="isLoggedIn$ | async; else loginicon" class="color-ceniza ajuste-registro-remoto-menu-der">
+      <mat-icon>menu</mat-icon>
+    </mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="'/user'">
+        <mat-icon class="menu-icon">person</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button mat-menu-item [routerLink]="'/user/transbank'">
+        <mat-icon class="menu-icon">payment</mat-icon>
+        <span>Medios de pago</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon class="menu-icon color-ceniza-claro">help</mat-icon>
+        <span class="color-ceniza-claro">Ayuda</span>
+      </button>
+      <button mat-menu-item (click)="logoutaction()">
+        <mat-icon class="menu-icon">logout</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-menu>
+    <ng-template #loginicon>
+      <a (click)="loginaction()" *ngIf="mostrarEnlaceLogin">
+        <mat-icon aria-hidden="false" aria-label="Ingresar" class="btn-exit ajuste-registro-remoto-menu-der">login</mat-icon>
+      </a>
+    </ng-template>
+  </div>
+
+</div>
+
+<div class="toolbar" [@routeAnimations]="prepareRoute(outlet)"  *ngIf="showCompleteHeader()" [ngClass]="{'page-qr': estaEnInicio}" >
+
+  <!--   <a (click)="backaction()">
+    <mat-icon *ngIf="false" [@EnterLeave]="'on'" aria-hidden="false" aria-label="Atrás" class="btn-back">keyboard_arrow_left</mat-icon>
+  </a> -->
+  <!-- <img id="logo" alt="Petrobras-logo" [src]="imageSource" [@EnterLeave]="'flyIn'"/> -->
+  <img id="logo" alt="Petrobras-logo" src="../assets/logo.svg" [@EnterLeave]="'flyIn'" />
+
+  <!-- <a (click)="logoutaction()">
+    <mat-icon *ngIf="false" [@EnterLeave]="'off'" aria-hidden="false" aria-label="Salir" class="btn-exit">exit_to_app</mat-icon>
+  </a>
+   -->
+
+
+
+  <!-- <div class="spacer"></div>-->
+</div>
+<div class="wrapper" [ngClass]="{'super-medio' : isSuperMedio()}">
+
+  <!-- <div > -->
+  <div class="spinner-ctn" *ngIf="loader">
+    <mat-spinner class="loader"></mat-spinner>
+    <h3 *ngIf="loaderMessage" class="loader-message"><strong>Un atendedor se acercará a ayudarte</strong></h3>
+  </div>
+
+  <div *ngIf="background" class="assistance-ctn">
+  </div>
+  <router-outlet #outlet="outlet" (activate)="onActivate($event)"></router-outlet>
+
+  <!-- Footer 
+    <footer>   Esmax    </footer>-->
+
+</div>

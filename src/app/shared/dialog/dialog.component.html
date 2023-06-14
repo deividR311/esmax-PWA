@@ -1,0 +1,14 @@
+<div class="dialog-ctn">
+    <div>
+        <img width="100%" height="100%" class="dialog-img" [src]="data.imgSrc" alt="dialog-img" />
+    </div>
+    <div>
+        <h2 [class]="(data.isError) ? 'dialog-error' : 'dialog-title'"><strong>{{ data.title }}</strong></h2>
+    </div>
+    <div>
+        <p class="dialog-description">{{data.description}}</p>
+    </div>
+    <div>
+        <button mat-flat-button class="dialog-btn" (click)="closeDialog()">{{data.btnName}}</button>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+
+.card-list-option{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.card-type{
+ font-weight: 600;
+ color: #008542;
+}
+
+.card-number{
+    line-height: 100%;
+}
+
+
+.dialogselect__title {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    color: #000000;
+    align-self: flex-start;
+    margin-bottom: 8px !important;
+}
+.dialogselect__subtitle {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--ceniza);
+    align-self: flex-start;
+}
+
+.dialogselect__card-type {
+    display: block;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    color: #868E96;
+}
+
+.dialogselect__card-number {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--ceniza);
+}
+.dialogselect__card-checked {
+    color: var(--verde-petrobras) !important;
+}
+
+.dialogselect__card-unchecked {
+    color: var(--ceniza) !important;
+}
+.dialogselect__card-delete {
+    color: var(--ceniza);
+}
+.dialogselect__list-medio-pago {
+    border: 1px solid #BCBDBC;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.dialogselect__list-medio-pago-checked {
+    border: 1px solid var(--verde-petrobras) !important;
+}
+.dialogselect__sin-tarjeta {
+    margin-bottom: 35px;
+}
+.dialogselect__sin-tarjeta h3 {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.41px;
+    color: #000000;
+    text-align: left;
+}
+
+.dialogselect__sin-tarjeta p {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: var(--ceniza);
+}
+.dialogselect__registrar-tarjeta {
+    align-self: flex-end !important;
+}
+.dialogselect__registrar-tarjeta a {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.41px;
+    color: var(--secondary);
+}
+
+.type-card {
+    height: 20px;
+    width: 27px;
+}
+.dialogselect__button-close {
+    height: 48px;
+}
+.margin-bottom-1 {
+    margin-bottom: 1px;
+}
+.msg-sin-tarjeta {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: var(--ceniza);
+    margin-bottom: 56px;
+}
+.dialogselect__sin-tarjeta-titulo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #000000;
+}
+.text-nueva-tarjeta {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: right;
+    letter-spacing: -0.41px;
+    color: var(--verde-petrobras);
+}

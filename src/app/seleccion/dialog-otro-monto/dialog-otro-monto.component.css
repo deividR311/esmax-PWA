@@ -1,0 +1,38 @@
+ .dialog-otro-monto .mat-dialog-container{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+.contenido {
+    width: 90%;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.otro-monto__titulo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.25px;
+    color: var(--ceniza);
+    margin: 0px;
+}
+.dialog-otro-monto-form {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.lista-validaciones-general{
+    padding-left: 5%;
+}
+.lista-validaciones-general li {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 15px;
+    color: #757878;
+    margin-top: 5px;
+}

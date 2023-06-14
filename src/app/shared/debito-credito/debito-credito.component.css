@@ -1,0 +1,55 @@
+@media only screen and (max-width: 600px) {
+    .dialog-debito-credito{
+        max-width: none !important;
+        width: 100vw !important;
+    }
+  }  
+.dialog-debito-credito .mat-dialog-container{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+.contenido {
+    width: 96%;
+    text-align: center;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.interior-content.debito-credito {
+    margin: 30px auto 0px !important;
+}
+.debito-credito .titulo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.25px;
+    color: #000000;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    margin-bottom: 15px;
+}
+.debito-credito .texto-descriptivo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 15px;
+    color: #757878;
+    margin-bottom: 30px;
+}
+.debito-credito .margin-bottom-20{
+    margin-bottom: 20px;
+}
+.debito-credito .credito-debito-x{
+    float: right;
+    margin-right: 5px;
+    cursor: pointer;
+    color: #757878;;
+}
+.debito-credito .height-width-31 {
+    height: 31px;
+    width: 31px;
+}

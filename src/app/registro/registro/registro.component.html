@@ -1,0 +1,323 @@
+<div class="interior-content contenido-principal app-registro-usuario">
+    <div class="esmax-stepper margin-top-24">
+        <mat-horizontal-stepper linear labelPosition="bottom" #stepper class="step-registro-usuario">
+            <!-- ------------------ 1: paso ------------------ -->
+            <mat-step [stepControl]="formRegisterA">
+                <form [formGroup]="formRegisterA">
+                    <ng-template matStepLabel>Inicio</ng-template>
+                    <div class="validacion">
+                        <h1 class="titulo">Regístrate</h1>
+                        <p class="parrafo">Disfruta de nuestros beneficios y promociones.</p>
+                        <div class="registro-wrapper validacion">
+                            <p>
+                                <label><b>Ingresa tu RUT *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input appRut matInput placeholder="Ingresa tu RUT" formControlName="run" id="run" required formatRut (input)="rutYaRegistrado = false">
+                                    <mat-error *ngIf="hasErrorA('run', 'required')">El rut es requerido</mat-error>
+                                    <mat-error *ngIf="hasErrorA('run', 'rutValidator')">El rut no es correcto</mat-error>
+                                </mat-form-field>
+                                <mat-error *ngIf="rutYaRegistrado" class="error-rut-en-uso">El rut ya está registrado</mat-error>
+                            </p>
+                            <p>
+                                <label><b>Ingresa tu correo electrónico *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Ingresa tu correo electrónico" formControlName="email" id="email" required
+                                        oninput="this.value = this.value.toLowerCase()">
+                                    <mat-error *ngIf="hasErrorA('email', 'required')">El correo es requerido</mat-error>
+                                    <mat-error *ngIf="hasErrorA('email', 'pattern')">Debe ingresar un correo válido</mat-error>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <label><b>Reingresa tu correo electrónico *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Reingresa tu correo electrónico" formControlName="email2" id="email2" required
+                                        oninput="this.value = this.value.toLowerCase()">
+                                    <mat-error *ngIf="hasErrorA('email2', 'required')">El correo es requerido</mat-error>
+                                    <mat-error *ngIf="hasErrorA('email2', 'pattern')">Debe ingresar un correo válido</mat-error>
+                                    <mat-error *ngIf="f.email2.errors?.mustMatch">Ambos correos deben ser iguales</mat-error>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <label><b>Ingresa tu celular *</b></label>
+                                <mat-form-field floatLabels="none" appearance="outline" class="width-100" >
+                                    <input matInput placeholder="Ingresa tu celular" type="tel" formControlName="celular" id="celular" maxlength="8" required>
+                                    <span matPrefix>+56&nbsp;9&nbsp;</span>
+                                    <mat-error *ngIf="hasErrorA('celular', 'required')">El celular es requerido</mat-error>
+                                </mat-form-field>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+
+            <!-- ------------------ 2: paso ------------------ -->
+            <mat-step [stepControl]="formRegisterB">
+                <form [formGroup]="formRegisterB">
+                    <ng-template matStepLabel>Datos</ng-template>
+                    <div class="validacion">
+                        <h1 class="titulo">Ingresa tus datos</h1>
+                        <p class="parrafo">¡Queremos conocerte!</p>
+                        <div class="registro-wrapper validacion">
+                            <p>
+                                <label><b>Nombre *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Ingresa tu nombre" formControlName="nombre" id="nombre" required>
+                                    <mat-error *ngIf="hasErrorB('nombre', 'required')">El nombre es requerido</mat-error>
+                                    <mat-error *ngIf="hasErrorB('nombre', 'pattern')">Sólo se permiten letras</mat-error>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <label><b>Apellido *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Ingresa tu apellido" formControlName="apellido" id="apellido" required>
+                                    <mat-error *ngIf="hasErrorB('apellido', 'required')">El apellido es requerido</mat-error>
+                                    <mat-error *ngIf="hasErrorB('apellido', 'pattern')">Sólo se permiten letras</mat-error>
+                                </mat-form-field>
+
+                            </p>
+                            <p>
+                                <label><b>Sexo</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100 genero">
+                                    <mat-select matNativeControl placeholder="Selecciona una opción" formControlName="genero" id="genero">
+                                        <mat-option value="NO CONTESTA">No contesta</mat-option>
+                                        <mat-option value="FEMENINO">Femenino</mat-option>
+                                        <mat-option value="MASCULINO">Masculino</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <!-- (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" (keyup)="keyEvent('keyUp', $event)" -->
+                                <label><b>Fecha de nacimiento</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <!-- [min]="minDate" [max]="maxDate" -->
+                                    <input matInput placeholder="DD/MM/AAAA" [matDatepicker]="picker" formControlName="fecha" id="fecha" [max]="maxDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker startView="year" [startAt]="atDate"></mat-datepicker>
+                                    <mat-error *ngIf="hasErrorB('fecha', 'matDatepickerMin')">Un tiempo muy lejano</mat-error>
+                                    <mat-error *ngIf="hasErrorB('fecha', 'matDatepickerMax')">Debe ser mayor de 18 años</mat-error>
+                                    <mat-error *ngIf="hasErrorB('fecha', 'matDatepickerFilter') || hasErrorB('fecha', 'matDatepickerParse')">La fecha es incorrecta</mat-error>
+
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <label><b>Comuna</b></label>
+                                <mat-form-field floatLabels="never" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Selecciona una opción" formControlName="comuna" id="comuna" type="text"
+                                        [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredComunas | async" [value]="option.nombre">
+                                            {{option.nombre}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!-- ------------------ 3: paso ------------------ -->
+            <mat-step [stepControl]="formRegisterC">
+                <form [formGroup]="formRegisterC">
+                    <ng-template matStepLabel>Contraseña</ng-template>
+                    <div class="validacion">
+                        <h1 class="titulo">Crea tu contraseña</h1>
+                        <p class="parrafo">Último paso para tu registro</p>
+                        <div class="registro-wrapper validacion">
+                            <p>
+                                <label><b>Nueva contraseña *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Nueva contraseña" formControlName="clave" id="clave" required maxlength="4"
+                                        [type]="hide ? 'password' : 'tel'" autocomplete="new-password">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                        [attr.aria-pressed]="hide">
+                                        <mat-icon class="grey-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="hasErrorC('clave', 'required')">La clave es requerida</mat-error>
+                                    <mat-error *ngIf="hasErrorC('clave', 'pattern')">La clave solo acepta números</mat-error>
+                                    <!-- <mat-hint>Nota: no operan todas validaciones aun.</mat-hint> -->
+                                </mat-form-field>
+                            </p>
+                            <p>
+                                <label><b> Confirma tu nueva contraseña *</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                                    <input matInput placeholder="Confirma tu nueva contraseña" formControlName="clave2" id="clave2" required
+                                        maxlength="4" [type]="hide ? 'password' : 'tel'" autocomplete="new-password">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                        [attr.aria-pressed]="hide">
+                                        <mat-icon class="grey-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="hasErrorC('clave2', 'required')">Debe ingresar nuevamente la clave</mat-error>
+                                    <mat-error *ngIf="fff.clave2.errors?.mustMatch">Las claves no son iguales</mat-error>
+                                </mat-form-field>
+                            </p>
+                            <ul class="lista-validaciones" [ngClass]="{'opacidad-media': ( !fff.clave2.valid), 'lista-validada': fff.clave2.valid }">
+                                <li>Tu contraseña debe tener 4 números</li>
+                                <li>Sin espacios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!-- Paso 4 -->
+            <mat-step>
+                <form [formGroup]="formRegisterD">
+                    <ng-template matStepLabel>Validacion</ng-template>
+                    <div class="validacion">
+                        <h1 class="titulo">Valida tu cuenta</h1>
+                        <p class="parrafo">Para poder continuar con tu registro debemos validar tu cuenta</p>
+                        <div class="validacion">
+                            <p>
+                                <button class="validation-button" [ngClass]="{selected:isChalengeSMS}" (click)="setSMSChalenge(true)"
+                                    mat-stroked-button>
+                                    <table mat-table>
+                                        <td>
+                                            <img src="../../../assets/sms.svg" alt="">
+                                        </td>
+                                        <td class="send-email-sms">
+                                            Enviar código por SMS: <br> {{f["celular"].value}}
+                                        </td>
+                                        <td style="text-align:right">
+                                            <mat-icon *ngIf="!isChalengeSMS" class="mat-22 grisOscuro">check_circle_outline</mat-icon>
+                                            <mat-icon *ngIf="isChalengeSMS" class="mat-22 verde">check_circle</mat-icon>
+                                        </td>
+                                    </table>
+                                </button>
+                            </p>
+                        </div>
+                        <div class="validacion">
+                            <p>
+                                <button class="validation-button" [ngClass]="{selected:!isChalengeSMS}" (click)="setSMSChalenge(false)"
+                                    mat-stroked-button>
+                                    <table mat-table>
+                                        <td>
+                                            <mat-icon class="mat-18 grisOscuro">mail_outline</mat-icon>
+                                            <!-- <img src="../../../assets/mail.svg" alt=""> -->
+                                        </td>
+                                        <td class="send-email-sms">
+                                            Enviar código por correo: <br> {{f["email"].value}}
+                                        </td>
+                                        <td style="text-align:right">
+                                            <mat-icon *ngIf="isChalengeSMS" class="mat-22 grisOscuro">check_circle_outline</mat-icon>
+                                            <mat-icon *ngIf="!isChalengeSMS" class="mat-22 verde">check_circle</mat-icon>
+                                        </td>
+                                    </table>
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!-- Paso 5: email -->
+            <mat-step [stepControl]="formRegisterD">
+                <form [formGroup]="formRegisterD">
+                    <ng-template matStepLabel>Validar</ng-template>
+                    <div class="validacion">
+                        <div *ngIf="!isChalengeSMS">
+                            <h1 class="titulo">Validación por correo</h1>
+                            <p class="parrafo">Ingresa el código de 4 dígitos enviado al correo {{f["email"].value}} para validar tu cuenta.</p>
+                        </div>
+                        <div *ngIf="isChalengeSMS">
+                            <h1 class="titulo">Validación por mensaje</h1>
+                            <p class="parrafo">Ingresa el código de 4 dígitos enviado al telefono +569 {{f["celular"].value}} para validar tu cuenta.</p>
+                        </div>
+                        <div class="registro-wrapper validacion">
+                            <p>
+                                <label><b>Código de verificación</b></label>
+                                <mat-form-field floatLabel="always" appearance="outline" class="width-100 margin-bottom-16">
+                                    <input matInput placeholder="Ingresar código" formControlName="codigo" id="codigo" required maxlength="4" type="text">
+                                    <mat-icon *ngIf="codeCompare['codigo'].invalid" matSuffix class="mat-18 grey-color">check_circle_outline
+                                    </mat-icon>
+                                    <mat-icon *ngIf="codeCompare['codigo'].valid" matSuffix class="mat-18 verde">check_circle</mat-icon>
+                                </mat-form-field>
+                            </p>
+                            <div *ngIf="mostrarCrono" class="text-align-center">
+                                <p>
+                                    <b class="verde">Reenviar código en
+                                    <app-cronometro-decremento [iniciar]="mostrarCrono" (finCronometro)="finalizoCronometro()" ></app-cronometro-decremento>
+                                </b>
+                            </p>
+                            </div>
+                            <div *ngIf="!mostrarCrono" class="text-align-center">
+                                <p><a (click)="sendCode(true)"><b class="azul">Reenviar código ahora </b></a></p>
+                            </div>
+                            <div *ngIf="display === 'error'">
+                                <p><a><b class="azul">No se ha podido enviar el SMS </b></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step>
+                <form [formGroup]="formRegisterD">
+                    <!-- <ng-template matStepLabel>Validar</ng-template> -->
+                    <div class="operacion-exitosa" *ngIf="isFinishOk">
+                        <div class="operacion-exitosa-circulo">
+                            <mat-icon class="iconcargarlista">done</mat-icon>
+                        </div>
+                        <p class="operacion-exitosa-titulo" >{{finishOkMsg1}}</p>
+                        <p class="operacion-exitosa-contenido">{{finishOkMsg2}}</p>
+                    </div>
+                    <div class="validacion fin" *ngIf="!isFinishOk">
+                        <p class="checkNOToki">
+                            <mat-icon>error</mat-icon>
+                        </p>
+                        <p>
+                            <span class="ready"><b> {{finishOkMsg1}}</b></span> <br><br>
+                            <span class="end"> {{finishOkMsg2}} </span>
+                        </p>
+
+                    </div>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="validacion width-100">
+        <div [ngSwitch]="step">
+            <div *ngSwitchCase="0" class="footer-butons width-100">
+                <button mat-flat-button color="warn" [disabled]="formRegisterA?.invalid || validandoRut" (click)="validarRut()">Siguiente</button>
+                <!--<h3><b> ¿Ya tienes cuenta? <a href="login">Iniciar Sesion</a> </b></h3>-->
+            </div>
+            <div *ngSwitchCase="1" class="footer-butons width-100">
+                <button mat-flat-button color="warn" [disabled]="!formRegisterB.valid" (click)="goAhed(2)">Siguiente</button>
+                <!--<h3><b> ¿Ya tienes cuenta? <a href="login">Iniciar Sesion</a> </b></h3>-->
+            </div>
+
+            <div *ngSwitchCase="2" class="footer-butons width-100">
+                <form [formGroup]="formRegisterC" class="margin-bottom-16">
+                    <mat-checkbox color="primary" formControlName="privacyCheck" required class="radio-acepto-politica"></mat-checkbox>
+                    <span class="registro-acepto-politica">
+                        Acepto <b><a class="azul" (click)="openDialog()">Politica de Privacidad Online</a></b> y uso de datos
+                    </span>
+
+                </form>
+                <button mat-flat-button color="warn" [disabled]="!formRegisterC.valid" (click)="goAhed(3)">Registrarme</button>
+                <!--<h3><b> ¿Ya tienes cuenta? <a href="login">Iniciar Sesion</a> </b></h3>-->
+            </div>
+
+
+
+            <div *ngSwitchCase="3" class="footer-butons width-100">
+                <button mat-flat-button color="warn" [disabled]="!formRegisterC.valid" (click)="goAhed(4)">Enviar código</button>
+                <!--<h3><b> ¿Ya tienes cuenta? <a href="login">Iniciar Sesion</a> </b></h3>-->
+            </div>
+            <div *ngSwitchCase="4" class="footer-butons width-100">
+                <button mat-flat-button color="warn" [disabled]="!formRegisterD.valid" (click)="validated()">Continuar</button>
+                <!--<h3><b> ¿Ya tienes cuenta? <a href="login">Iniciar Sesion</a></b> </h3>-->
+            </div>
+            <div *ngSwitchCase="5" class="footer-butons width-100">
+                <button mat-flat-button color="warn" [disabled]="!isFinishOk" (click)="comencemos()">Comencemos</button>
+            </div>
+        </div>
+
+    </div>
+</div>

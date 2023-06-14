@@ -1,0 +1,39 @@
+<div class="interior-content validar-correo contenido-principal">
+    <div class="width-100">
+        <h1 class="titulo-validar-correo mat-headline ">Validación por Correo</h1>
+        <p class="parrafo-validar-correo">Ingresa el código de 4 dígitos enviado al correo {{email}} para validar tu cuenta.</p>
+        <form *ngIf="form" [formGroup]="form" autocomplete="off" class="padding-top-20">
+            <label>Código de verificación</label> <br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100 padding-top-0">
+              <input matInput type="text" formControlName="codigo_verificacion" name="codigo_verificacion" id="codigo_verificacion" maxlength="4" (input)="codigosNoCoinciden = false" placeholder="Ingresar código">
+              <mat-error *ngIf="form.controls.codigo_verificacion.hasError('required')">El código es requerido</mat-error>
+              <mat-error *ngIf="form.controls.codigo_verificacion.hasError('pattern')">El código solo acepta números</mat-error>
+              <mat-error *ngIf="form.controls.codigo_verificacion.hasError('minlength')">Debe contener 4 caracteres</mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="codigosNoCoinciden" >Código no válido </mat-error>
+        </form>
+        <br>
+        <!-- inicio seccion para reenvio de codigo -->
+        <div align="center" *ngIf="mostrarCrono">
+            <p>
+              <b class="verde">Reenviar código en 
+                <app-cronometro-decremento [iniciar]="mostrarCrono" (finCronometro)="finalizoCronometro()" ></app-cronometro-decremento>
+              </b>
+            </p>
+          </div>
+          <div align="right" *ngIf="!mostrarCrono">
+              <span class="opacidad-media">No he recibido el código,</span>
+              <p><a (click)="enviarCodigo()" >
+                <mat-icon class="icon-reenviar-correo" *ngIf="iniciarLlamadaBackendReenviarCodigo"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+                <b class="azul">Reenviar código ahora </b>
+              </a></p>
+          </div>
+          <!-- inicio seccion para reenvio de codigo -->
+    </div>
+</div>
+<div class="footer-butons contenido-principal" *ngIf="form" >
+    <button mat-flat-button color="warn" [disabled]="form.invalid || iniciarLlamadaBackend || iniciarLlamadaBackendReenviarCodigo" (click)="guardar()" >
+      <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+      Guardar
+    </button>
+</div>

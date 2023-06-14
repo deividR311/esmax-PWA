@@ -1,0 +1,38 @@
+<div><div class="linea-top-modal"></div></div>
+<div class="contenedor app-dialog-login-basic">
+    <div class="titulo margin-top-32">
+        <h3 >Para continuar y pagar con <span *ngIf="data">{{data?.medioPago  | titlecase}}</span> debes iniciar sesión</h3>
+    </div>
+    <form *ngIf="form" [formGroup]="form">
+        <p class="margin-top-32">
+            <label>Ingresa tu RUT</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+              <input appRut matInput type="text" formControlName="usuario" name="usuario" formatRut id="usuario" placeholder="Ingresa tu RUT" autocomplete="off" maxlength=12>
+              <mat-error *ngIf="hasRutError('usuario', 'required')">El rut es requerido</mat-error>
+              <mat-error *ngIf="hasRutError('usuario', 'rutValidator')">El rut no es correcto</mat-error>
+            </mat-form-field>
+          </p>
+
+          <p class="padding-bottom-60">
+            <label>Ingresa tu contraseña</label><br>
+            <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+              <input matInput [type]="hide ? 'password' : 'tel'" formControlName="clave" name="clave" id="clave" placeholder="Ingresa tu contraseña" autocomplete="off" type="tel" maxlength="4" minlength="4" >
+              <mat-error *ngIf="hasRutError('clave', 'required')">La constraseña es requerida</mat-error>
+              <mat-error *ngIf="hasRutError('clave', 'error')">Las credenciales no son válidas</mat-error>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon class="grey-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+          </p>
+    </form>
+</div>
+<div class="footer-butons div-center">
+    <button mat-flat-button color="warn" [disabled]="form.invalid || iniciarLlamadaBackend" (click)="login()" >
+      <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+      Iniciar Sesión
+    </button>
+    <div class="text-footer">
+        ¿No tienes cuenta? <span class="registrate" mat-dialog-close (click)="registrate()">Regístrate</span>
+    </div>
+</div>

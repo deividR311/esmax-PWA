@@ -1,0 +1,24 @@
+.dialog-ctn {
+    text-align: center;
+}
+
+.dialog-img {
+    width: 50px;
+    height: 50px;
+}
+
+.dialog-title {
+    color: var(--verde-petrobras);
+}
+
+.dialog-error {
+    color: var(--rojo);
+}
+
+.dialog-description {
+    color: var(--ceniza);
+}
+
+.dialog-btn {
+    background-color: var(--verde-petrobras);
+}

@@ -1,0 +1,41 @@
+.contenido{
+    width: 90%;
+    max-width: 300px;
+}
+.titulo-validar-correo {
+    padding-top: 20px;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 29px;
+    color: #000000;
+}
+.padding-top-20{
+    padding-top: 20px;
+}
+.parrafo-validar-correo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #757878;
+}
+
+.validar-correo label{
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    color: #757878;
+}
+.azul {
+    color: #006298;
+}
+.icon-reenviar-correo {
+    display: inline-block;
+    margin-right: 5px;
+}

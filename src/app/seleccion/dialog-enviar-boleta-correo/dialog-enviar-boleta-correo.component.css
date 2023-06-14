@@ -1,0 +1,117 @@
+@media only screen and (max-width: 600px) {
+    .dialog-enviar-boleta-correo {
+        max-width: none !important;
+        width: 100vw !important;
+    }
+    .footer-butons {
+        max-width: none !important;
+    }
+}
+
+.dialog-enviar-boleta-correo .mat-dialog-container{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    cursor: auto;
+}
+
+.dialog-enviar-boleta-correo .interior-content {
+    margin: 25px auto 0px !important;
+}
+
+.dialog-enviar-boleta-correo .contenido {
+    width: 90%;
+}
+
+.dialog-enviar-boleta-correo .footer-button-cerrar {
+    width: 100%;
+    display: flex;
+}
+
+.dialog-enviar-boleta-correo .titulo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    text-align: start;
+}
+.dialog-enviar-boleta-correo .descripcion {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #757878;
+    text-align: start;
+    height: 24px;
+}
+.dialog-enviar-boleta-correo .mat-grid-tile.enviar-boleta-correo-x .mat-figure {
+    justify-content: flex-end;
+}
+
+.dialog-enviar-boleta-correo .mat-grid-tile.justify-content-end .mat-figure {
+    justify-content: end;
+}
+
+.dialog-enviar-boleta-correo .dialog-enviar-boleta-correo__label {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    color: #757878;
+}
+
+.dialog-enviar-boleta-correo .enviar-boleta-correo-form {
+    margin-top: 30px;
+    margin-bottom: 150px;
+}
+
+.dialog-enviar-boleta-correo .enviar-boleta-correo-content-form {
+    min-height: 300px;
+}
+
+.dialog-enviar-boleta-correo .enviar-boleta-correo-exitoso {
+    /*height: 267px;*/
+    height: calc(30px + 150px + 85px);
+}
+
+
+
+.dialog-enviar-boleta-correo .circulo-59 {
+
+    /*position: absolute;*/
+    margin: auto;
+    width: 59px;
+    height: 59px;
+    left: 158px;
+    top: 323px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    text-align: center;
+}
+ 
+.dialog-enviar-boleta-correo .boton-check-circulo {
+    padding-top: 18px;
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+.dialog-enviar-boleta-correo .enviar-boleta-correo-detalle-listo {
+    margin-top: 32px;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.41px;
+    color: #000000;
+}
+.padding-top-20 {
+    padding-top: 20px;
+}

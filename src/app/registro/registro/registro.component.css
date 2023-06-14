@@ -1,0 +1,253 @@
+.error-rut-en-uso{
+    font-size: 75%;
+    padding-left: 10px;
+    margin-top: -10px;
+}
+.registro {
+    margin-top: 150px;
+    width: 90%;
+    height: 100%;
+}
+
+.registro p {
+    width: 100%;
+    background-color: aqua;
+}
+.registro-wrapper  {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+    margin: 5px auto 5px;
+    line-height: 50%;
+}
+.registro-wrapper mat-form-field {
+    width: 100%;
+}
+
+.registro h1,
+.registro h2,
+.registro h3 {
+    text-align: center;
+}
+
+h3 {
+    padding-bottom: 5%;
+}
+
+.step-registro-usuario mat-horizontal-stepper-header-container{
+    width: 300px !important;
+}
+app-registro > div > div > mat-horizontal-stepper > div.mat-horizontal-stepper-header-container {
+    max-width: 500px;
+}
+
+/*
+.step-registro-usuario .mat-horizontal-stepper-header-container{
+    background-color: black;
+    width: 200px;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+    background-color: black!important;
+    width: 200px!important;
+}*/
+
+.app-registro-usuario .validacion {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /* max-width: 400px; */
+    align-self: center;
+    flex-direction: column;
+    /*margin: 5px auto 5px; */
+}
+.app-registro-usuario .titulo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    color: #000000;
+}
+.app-registro-usuario .parrafo {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: #757878;
+    margin: 8px 0px 32px 0px;
+}
+
+.app-registro-usuario .registro-acepto-politica {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #757878;
+}
+.step-registro-usuario .validation-button {
+    text-align: left;
+    width: 100%;
+    height: 56px;
+    color: #7c7c7c;
+    display: block;
+    margin-bottom:0em;
+    line-height: 95%;
+}
+
+.step-registro-usuario td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.step-registro-usuario table {
+    width: 100%;
+    max-width: 400px;
+    height: 56px;
+}
+
+.step-registro-usuario .mat-horizontal-stepper-header-container {
+    display: none !important;
+}
+/*
+app-registro .footer-butons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    align-self: center;
+    flex-direction: column;
+    margin: 5px auto 5px;
+}
+app-registro .footer-butons h3 {
+    text-align: center;
+}
+*/
+
+.td-val {
+    /* display: inline; */
+    width: 7vh;
+    text-align: center;
+    padding: 1%;
+}
+
+.br {
+    display: block;
+    margin-bottom:0em;
+    line-height: 90%;
+}
+
+app-registro label {
+    color: #7c7c7c;
+    padding-top: 0rem;
+}
+
+app-registro ul {
+    line-height: 120%;
+}
+
+app-registro input[type=number] {
+  -webkit-text-security: disc;
+}
+
+h4 {
+    font-size: 2vh;
+    text-align: center;
+}
+
+.app-registro-usuario .radio-acepto-politica {
+    margin-left: 0px;
+    margin-right: 8px;
+}
+
+.step-registro-usuario .selected {
+  border: 1px solid green;
+}
+
+.step-registro-usuario .fin {
+  display: flexbox;
+  text-align: center;
+  vertical-align: center;
+  flex: content;
+  margin-top: 25vh;
+}
+
+.step-registro-usuario .end {
+  color: #7c7c7c;
+  font-size: 2.5vh;
+}
+
+.step-registro-usuario .ready {
+  font-size: 2.5vh;
+}
+.step-registro-usuario .mat-horizontal-content-container {
+    padding: 0px;
+}
+/*
+app-registro .interior-content {
+  
+  display: flex;
+  flex-grow: 1;
+  margin: 100px auto 0px;
+  padding: 0;
+  width: 100%;
+  min-width: 300px;
+  flex-direction: column;
+  align-items: center;
+}
+*/
+.grey-color {
+    color:#BCBDBC;
+}
+
+.grisOscuro {
+    color:#7c7c7c;
+}
+
+.verde {
+    color: #008542;
+}
+
+.mat-22
+{
+    font-size: 22px;
+}
+
+.azul {
+    color: #006298;
+}
+
+a {
+    text-decoration: none;
+    color: #006298;
+}
+
+/******************** extras gp *****************/
+
+.checkoki mat-icon {
+    color: var(--primary);
+    transform: scale(3);
+}
+
+.checkNOToki mat-icon {
+    color: #7c7c7c;
+    transform: scale(3);
+}
+
+.app-registro-usuario .send-email-sms {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #757878;
+}
+
+.app-registro-usuario .mat-select-arrow {
+    margin-top: 6px;
+    margin-right: 13px;
+}

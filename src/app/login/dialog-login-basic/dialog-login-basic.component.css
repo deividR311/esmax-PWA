@@ -1,0 +1,69 @@
+.footer-butons {
+    max-width: none;
+}
+.contenedor {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.titulo{
+    padding-right: 5%;
+    padding-left: 5%;
+    text-align: center;
+}
+.text-footer {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.41px;
+    color: #757878;
+}
+.titulo h3 {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    /*display: flex;*/
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.25px;
+    color: #757878;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    margin: 0px;
+}
+.padding-top-30{
+    padding-top: 30px;
+}
+.width-100{
+    width: 100%;
+}
+.registrate{
+    color: #006298;
+}
+.app-dialog-login-basic label {
+    /*font-family: Roboto;*/
+    font-family: "Trebuchet MS", Roboto, "Helvetica Neue", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    color: #757878;
+}
+.padding-bottom-60{
+    padding-bottom: 60px;
+}
+.cerrar-modal{
+    cursor: pointer;
+}
+.grey-color {
+    color:#BCBDBC;
+}
+.app-dialog-login-basic {
+    cursor: auto;
+}

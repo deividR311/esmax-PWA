@@ -1,0 +1,40 @@
+.toolbar-pdf{
+    text-align: center;
+    position: absolute;
+    width: 80%;
+    top: 10px;
+}
+
+.spinner-pdf{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    background-size: 100%;
+}
+
+
+.texto-1{
+    font-size: 24px;
+    color: var(--azul-petrobras);
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.texto-ubicacion{
+    font-size: 16px;
+    color: var(--verde-petrobras);
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.icon-ubicacion{
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--verde-petrobras);
+    padding-top: 10px;
+    padding-bottom: 5px;
+}

@@ -1,0 +1,24 @@
+<div class="interior-content centro-pantalla-padre">
+    <div class="operacion-exitosa centro-pantalla-hijo" >
+        <div class="operacion-exitosa-circulo">
+            <mat-icon class="iconcargarlista">done</mat-icon>
+        </div>
+        <p class="operacion-exitosa-titulo" >¡Listo!</p>
+        <p class="operacion-exitosa-contenido">{{mensajeMostrar}}</p>
+    </div>
+    <!--
+    <div class="contenido centrado-horizontal">
+        <div >
+            <div class="circulo-verde" >
+            <mat-icon class="boton-check-circulo">done</mat-icon>
+            </div>
+            <p class="negrita padding-top-20 p-listo" >¡Listo!</p>
+            <p class="descripcion">Tu correo se ha modificado con éxito</p>
+        </div>
+    </div>-->
+</div>
+
+<div class="footer-butons contenido-principal" [ngSwitch]="origen" >
+    <button *ngSwitchCase="'listo'"  mat-flat-button color="warn" (click)="comenzar()" >Aceptar</button>
+    <button *ngSwitchCase="'listoPass'"  mat-flat-button color="warn" (click)="irLogin()" >Aceptar</button>
+</div>

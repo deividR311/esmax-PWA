@@ -1,0 +1,26 @@
+.seleccion-productos-list .registro-wrapper.edit-user{
+    width: 100%;
+}
+.align-self-flex-start{
+    align-self: flex-start;
+}
+.flecha-a-derecha{
+    opacity: .5;
+    font-size: 25px;
+}
+.editar-usuario label{
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    color: #757878;
+}
+
+.editar-usuario form p {
+    margin:0px !important;
+}
+.color-text-input-disabled-rut {
+    color: #999999 !important;
+}

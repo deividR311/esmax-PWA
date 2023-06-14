@@ -1,0 +1,49 @@
+<div class="interior-content">
+    <div class="contenido-principal" >
+        <form [formGroup]="formLogin" (keyup.enter)="login()">
+            <mat-tab-group mat-align-tabs="center" class="login-tab login__tab-group">
+                <!-- #enddocregion align-start -->
+                <mat-tab label="Usuario">
+                    <div class="login-tab-form login__content">
+
+                        <p class="p-center">
+                            <label class="login__label">Ingresa tu RUT</label>
+                            <mat-form-field appearance="outline" class="width-100">
+                                <input appRut matInput type="text" formControlName="usuario" name="usuario" id="usuario" placeholder="Ingresa tu RUT" >
+                                <mat-error *ngIf="hasRutError('usuario', 'required')">Ingresa tu RUT</mat-error>
+                                <mat-error *ngIf="hasRutError('usuario', 'rutValidator') && !hasRutError('usuario', 'required')">Formato invalido</mat-error>
+                            </mat-form-field>
+                        </p>
+                        <p class="p-center margin-bottom-0">
+                            <label class="login__label">Ingresa tu contraseña</label>
+                            <mat-form-field appearance="outline" class="width-100">
+                                <input matInput type="tel" class="mask-text" formControlName="clave" maxlength="4" minlength="4" placeholder="Ingresa tu contraseña">
+                                <mat-error *ngIf="hasCredentialError">El RUT y contraseña no coinciden.</mat-error>
+                            </mat-form-field>
+                        </p>
+                    
+                        <div class="login__recuperar-clave">
+                            <div class="olvido-clave"><a (click)="olvidasteClave()">¿Olvidaste tu contraseña?</a></div>
+                        </div>
+
+
+                    </div>
+                </mat-tab>
+
+
+                <mat-tab label="Empresa" [disabled]='true'>
+                    <p class="p-center">
+                        Datos empresa
+                    </p>
+                </mat-tab>
+            </mat-tab-group>
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+<div class="footer-butons contenido-principal">
+    <button mat-flat-button color="warn" [disabled]="formLogin.invalid || iniciarLlamadaBackend" (click)="login()" >
+        <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+        Iniciar sesión
+    </button>
+</div>

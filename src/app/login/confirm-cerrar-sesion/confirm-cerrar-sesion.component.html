@@ -1,0 +1,18 @@
+<div class="interior-content confirm-cerrar-sesion">
+    <div class="contenido">
+        <div class="div-imagen">
+            <img src='../../../assets/exclamacion-naranja.svg' />
+        </div>
+        <div class="cerrar-sesion-pregunta margin-top-20">
+            <span>¿Seguro que quieres <br>cerrar sesión?</span>
+        </div>
+        <div class="footer-button-cerrar">
+            <div>
+                <button  mat-stroked-button color='transparent'class="cancelar-cierre" (click)="cerrar(false)">Cancelar</button>
+            </div>
+            <div>
+                <button mat-flat-button class="confirmar-cierre" (click)="cerrar(true)">Cerrar Sesión</button>
+            </div>
+        </div>
+    </div>
+</div>

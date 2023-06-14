@@ -1,0 +1,106 @@
+<div class="interior-content editar-usuario contenido-principal">
+    <form [formGroup]="formUser" class="width-100">
+        <div class="seleccion-productos-list">
+            <h1 class="align-self-flex-start">Perfil</h1>
+            <h3 class="align-self-flex-start">Actualiza tus datos.</h3>
+            <div class="registro-wrapper edit-user">
+                <p>
+                    <label>Nombre</label>
+                    <mat-form-field class="width-100">
+                        <input matInput formControlName="nombre" id="nombre" required maxlength="50" (input)="removerDobleEspacio('nombre')">
+                        <mat-error *ngIf="formUser.controls.nombre.hasError('required')">El nombre es requerido</mat-error>
+                        <mat-error *ngIf="formUser.controls.nombre.hasError('pattern')">Sólo se permiten letras</mat-error>
+                        <mat-error *ngIf="formUser.controls.nombre.hasError('minlength')">Debe contener más información </mat-error>
+                        <mat-error *ngIf="formUser.controls.nombre.hasError('maxlength')">Excede el número máximo de caracteres permitidos</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <label>Apellido</label>
+                    <mat-form-field class="width-100">
+                        <input matInput formControlName="apellido" id="apellido" required maxlength="50" (input)="removerDobleEspacio('apellido')">
+                        <mat-error *ngIf="formUser.controls.apellido.hasError('required')">El apellido es requerido</mat-error>
+                        <mat-error *ngIf="formUser.controls.apellido.hasError('pattern')">Sólo se permiten letras</mat-error>
+                        <mat-error *ngIf="formUser.controls.apellido.hasError('minlength')">Debe contener más información </mat-error>
+                        <mat-error *ngIf="formUser.controls.nombre.hasError('maxlength')">Excede el número máximo de caracteres permitidos</mat-error>
+                    </mat-form-field>
+
+                </p>
+
+                <p>
+                    <label>RUT</label>
+                    <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                        <input appRut [readonly]="true"  matInput placeholder="11.111.111-1" formControlName="run" id="run" required class="color-negro" >
+                    </mat-form-field>
+                </p>
+
+                <label>Correo electrónico</label>
+                <p class="cursor-pointer border-input-disabled-color-enabled">
+                    <mat-form-field floatLabel="always" appearance="outline" class="width-100" (click)="irEditarCorreo()">
+                        <input matInput [readonly]="true" formControlName="email" id="email" required class="cursor-pointer">
+                        <mat-icon matSuffix class="flecha-a-derecha">arrow_right</mat-icon>
+                        <mat-error *ngIf="hasError('email', 'required')">El correo es requerido</mat-error>
+                        <mat-error *ngIf="hasError('email', 'email')">Debe ingresar un correo válido</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <label>Celular</label>
+                    <mat-form-field floatLabels="never" appearance="outline" class="width-100">
+                        <input matInput type="tel" formControlName="celular" id="celular" required maxlength=8>
+                        <span matPrefix>+56&nbsp;9&nbsp;</span>
+                        <mat-error *ngIf="hasError('celular', 'required')">Es obligatorio</mat-error>
+                        <mat-error *ngIf="formUser.controls.celular.hasError('pattern')">El código solo acepta números</mat-error>
+                        <mat-error *ngIf="formUser.controls.celular.hasError('minlength')">Faltan números</mat-error>
+                    </mat-form-field>
+                </p>
+                <label>Contraseña</label>
+                <p class="cursor-pointer border-input-disabled-color-enabled">
+                    <mat-form-field floatLabel="always" appearance="outline" (click)="changePass()" class="width-100">
+                        <input matInput type="tel" [readonly]="true" value="1234" type="password" class="cursor-pointer">
+                        <mat-icon matSuffix class="flecha-a-derecha">arrow_right</mat-icon>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <label>Sexo</label>
+                    <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                        <mat-select matNativeControl formControlName="genero" class="select-genero-edit-user">
+                            <mat-option value="NO CONTESTA"> No contesta </mat-option>
+                            <mat-option value="FEMENINO"> Femenino </mat-option>
+                            <mat-option value="MASCULINO"> Masculino </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <label>Fecha de nacimiento</label>
+                <p>
+                    <mat-form-field floatLabel="always" appearance="outline" class="width-100">
+                        <input matInput [matDatepicker]="picker" placeholder="DD-MM-AAAA" formControlName="fecha" id="fecha" [max]="maxDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="hasError('fecha', 'matDatepickerMin')">Es un pasado demasiado lejano</mat-error>
+                        <mat-error *ngIf="hasError('fecha', 'matDatepickerMax')">En un futuro demasiado lejano</mat-error>
+                        <mat-error *ngIf="hasError('fecha', 'matDatepickerFilter')">La fecha es incorrecta</mat-error>
+                        <mat-error *ngIf="hasError('fecha', 'matDatepickerParse')">La fecha es incorrecta</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <label>Comuna</label>
+                    <mat-form-field floatLabels="never" appearance="outline" class="width-100">
+                        <input matInput formControlName="comuna" id="comuna" [matAutocomplete]="auto" type="text" (input)="removerDobleEspacio('comuna')">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredComunas | async" [value]="option.nombre">
+                                {{option.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </p>
+
+            </div>
+        </div>
+        
+    </form>
+    <div class="footer-butons width-100">
+        <button mat-flat-button color="warn"  [disabled]="!formUser.valid || iniciarLlamadaBackend" (click)="saveData()">
+            <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+            Guardar
+        </button>
+    </div>
+</div>

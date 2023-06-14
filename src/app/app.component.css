@@ -1,0 +1,225 @@
+.toolbar-origin {
+    /* top: 70px; animacion */
+    z-index: 100;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.toolbar {
+    /*background-color: white;*/
+    /* top: 70px; animacion */
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    /* margin-top: 10px; */
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+#logo {
+    height: 100%;
+    max-width: 80vw;
+}
+
+.toolbar-buttons {
+    z-index: 101;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    flex-direction: row;
+}
+
+/* For Registro remoto ...............................*/
+/* 320px — 480px: Mobile devices
+   481px — 768px: iPads, Tablets
+   769px — 1024px: Small screens, laptops
+   1025px — 1200px: Desktops, large screens
+   1201px and more —  Extra large screens, TV
+   
+   
+    Extra small devices (phones, 600px and down)
+    @media only screen and (max-width: 600px) {...}
+
+    Small devices (portrait tablets and large phones, 600px and up)
+    @media only screen and (min-width: 600px) {...}
+
+    Medium devices (landscape tablets, 768px and up)
+    @media only screen and (min-width: 768px) {...}
+
+    Large devices (laptops/desktops, 992px and up)
+    @media only screen and (min-width: 992px) {...}
+
+    Extra large devices (large laptops and desktops, 1200px and up)
+    @media only screen and (min-width: 1200px) {...}
+*/
+
+/* If the screen size is 992px or more */
+@media only screen and (min-width: 992px) {
+    .toolbar-buttons {
+        /* background-color: #CCC; */
+        height: 50px;
+    }
+    .mat-icon {
+        height: 32px !important;
+        width: 32px !important;
+        font-size: 32px !important;
+    }
+    .toolbar {
+        height: 70px !important;
+    }
+
+    .ajuste-registro-remoto-menu-der {
+        padding-right: 400px;
+    }
+    .ajuste-registro-remoto-menu-izq {
+        padding-left: 400px;
+    }
+  }
+
+
+/* For Registro remoto ...............................*/
+.toolbar .btn-exit,
+.toolbar .btn-back,
+.toolbar-buttons .btn-exit,
+.toolbar-buttons .btn-back {
+    margin: 8px;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 100%;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media screen and (max-height: 450px) {
+    .toolbar {
+        height: 40px;
+    }
+}
+
+.toolbar #logo:hover {
+    opacity: 0.7;
+}
+
+.toolbar a {
+    cursor: pointer;
+}
+
+.toolbar a:hover {
+    opacity: 0.7;
+}
+
+/*   menu   */
+.menu-icon {
+    color: #757878;
+}
+.menu-icon span {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+}
+
+.loading-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+/* Absolute Center Spinner */
+.loading-indicator-origin {
+    position: fixed;
+    z-index: 999;
+    height: 1.4em;
+    width: 1.4em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.loading-indicator {
+    z-index: 999;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+/* Transparent Overlay */
+.loading-indicator:before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* transparencia de background // background-color: rgba(0, 0, 0, 0.3); */
+    background-color: rgba(0, 0, 0);
+}
+
+.spinner-ctn {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 20100;
+    opacity: 0.9;
+}
+
+.assistance-ctn {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 900;
+    opacity: 0.9;
+}
+
+.loader-message {
+    width: 60%;
+    height: 100px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70%;
+    transform: translateY(-50%);
+    margin: 0 auto !important;
+    color: var(--verde-petrobras);
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto !important;
+}

@@ -1,0 +1,42 @@
+
+<button mat-fab (click)="clickMenu()"
+    class="menu-button"
+    [class.mat-elevation-z2]="!isOver"
+    [class.mat-elevation-z8]="isOver"
+    (mouseover)="isOver = true"
+    (mouseleave)="isOver = false">
+    <img width="100%" height="100%" *ngIf="!openMenu" src="../../../../assets/user-octagon.svg" alt="octagon-img">
+    <em class="material-icons" *ngIf="openMenu">close</em>
+</button>
+
+<!-- menu button -->
+<button mat-mini-fab 
+class="action-button one mat-elevation-z8"    
+*ngIf="openMenu"
+color="basic" 
+(click)="sendAssistanceNotification()">
+    <img width="100%" height="100%" src="../../../../assets/gas-station.svg" alt="station-img">
+</button>
+
+<button mat-raised-button 
+class="label labelone mat-elevation-z8" 
+*ngIf="openMenu"
+color="basic" 
+(click)="sendAssistanceNotification()">
+    Uso del surtidor
+</button>
+
+<button mat-mini-fab 
+class="action-button two mat-elevation-z8"    
+*ngIf="openMenu"
+color="basic" 
+(click)="sendAssistanceNotification()">
+    <img width="100%" height="100%" src="../../../../assets/moneys.svg" alt="money-img">
+</button>
+<button mat-raised-button 
+class="label labeltwo mat-elevation-z8" 
+*ngIf="openMenu"
+color="basic" 
+(click)="sendAssistanceNotification()">
+    Ayuda para pago
+</button>

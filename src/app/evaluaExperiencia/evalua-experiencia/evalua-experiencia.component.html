@@ -1,0 +1,46 @@
+<div class="interior-content evalua-experiencia contenido-principal"></div>
+<hr class="hr-separador margin-top-10">
+<form *ngIf="form" [formGroup]="form" autocomplete="off">
+  <div class="interior-content evalua-experiencia contenido-principal margin-top-0">
+    <h1 class="titulo-evalua mat-headline">Evalúa tu experiencia</h1>
+    <!-- inicio seccion de estrellas -->
+    <div class="width-100 margin-top-16">
+      <mat-grid-list cols="5" rowHeight="3.5rem" >
+        <mat-grid-tile *ngFor="let estrella of estrellas; let i = index">
+          <div class="text-align-center">
+            <mat-icon svgIcon="estrella" class="cursor-pointer evalua-experiencia-estrella " [ngClass]="{'seleccionada':form.controls.evaluation.value > i }" (click)="evaluarConEstrella(estrella.value)"></mat-icon> <br>
+            <span class="estrella-leyenda">{{estrella.name}}</span>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <!-- fin seccion de estrellas -->
+  </div>
+  <hr class="hr-separador margin-top-24">
+  <div class="interior-content evalua-experiencia contenido-principal margin-top-0">
+    <!-- inicio seccion de opciones de preguntas -->
+    <h1 class="pregunta margin-top-24">Cuéntanos los motivos de tu evaluación</h1>
+    <div class="container-opciones">
+      <div class="opcion" *ngFor="let motivo of motivos" (click)="seleccionarMotivo(motivo)" [ngClass]="{'opcion-seleccionada':motivoSeleccionado.has(motivo)}">
+        <span class="vertical-align">
+          {{motivo}}
+        </span>
+      </div>
+    </div>
+    <!-- fin seccion de opciones de preguntas -->
+  </div>
+  <hr class="hr-separador margin-top-24">
+  <div class="interior-content evalua-experiencia contenido-principal margin-top-0">
+    <!-- inicio de caja de texto -->
+    <div class="margin-top-24 seccion-form margin-bottom-64">
+      <label class="label-textarea">¿Quieres agregar algo más?</label><br>
+      <mat-form-field floatLabel="always" appearance="outline" class="full-width-field padding-top-0 margin-top-14 height-90">
+        <textarea matInput  maxlength="400" rows="5" cols="40" class="no-resize evalua-comentario" formControlName="comments" placeholder="Escribe un comentario"></textarea>
+      </mat-form-field>
+    </div>
+    <!-- fin de caja de texto -->
+    <div class="footer-butons width-100">
+      <button mat-flat-button color="warn" (click)="finalizar()" >Finalizar</button>
+    </div>
+  </div>
+</form>

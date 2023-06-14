@@ -1,0 +1,7 @@
+<div class='snackbar-message-content' *ngIf="data" >
+    <div class='message-icon'>
+        <img height="26px" [src]='icono' *ngIf="icono"  />
+    </div>
+    <div class='message-content'*ngIf="contenido" [innerHTML]="contenido" ></div>
+    <div class='message-x' (click)="cerrar()" *ngIf="x"> x</div>
+</div>

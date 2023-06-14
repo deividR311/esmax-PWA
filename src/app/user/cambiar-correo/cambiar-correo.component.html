@@ -1,0 +1,35 @@
+<div class="interior-content cambiar-correo">
+    <div class="contenido contenido-principal">
+        <h1 class="titulo-cambiar-correo mat-headline ">Cambia tu correo electrónico</h1>
+        <form *ngIf="form" [formGroup]="form">
+            <p class="padding-top-20">
+                <label>Correo nuevo</label><br>
+                <mat-form-field floatLabel="always" appearance="outline" class="width-100 padding-top-0">
+                    <!--<input matInput type="text" formControlName="newMail" name="newMail" id="newMail" placeholder="Ingresa tu correo nuevo" #newMail (input)="newMail.value = newMail.value.trim().toLocaleLowerCase()" maxlength="60">-->
+                    <input matInput type="text" formControlName="newMail" name="newMail" id="newMail" placeholder="Ingresa tu correo nuevo" (input)="ajustarInput('newMail')" maxlength="60">
+                    <mat-error *ngIf="hasErrorA('newMail', 'required')">El correo es requerido</mat-error>
+                    <mat-error *ngIf="hasErrorA('newMail', 'pattern')">Debe ingresar un correo válido</mat-error>
+                    <mat-error *ngIf="hasErrorA('newMail', 'correoDiferenteAnterior')">Su nuevo correo debe ser diferente al actual</mat-error>
+                </mat-form-field>
+            </p>
+
+            <p class="padding-top-10">
+                <label>Confirmar correo</label><br>
+                <mat-form-field floatLabel="always" appearance="outline" class="width-100 padding-top-0">
+                    <input matInput type="text" formControlName="confirmMail" name="confirmMail" id="confirmMail" placeholder="Confirmar correo"  (input)="ajustarInput('confirmMail')"  maxlength="60">
+                    <mat-error *ngIf="hasErrorA('confirmMail', 'required')">El correo es requerido</mat-error>
+                    <mat-error *ngIf="hasErrorA('confirmMail', 'email')">Debe ingresar un correo válido</mat-error>
+                    <mat-error *ngIf="form.controls['confirmMail'].errors?.mustMatch">Ambos correos deben ser iguales</mat-error>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+</div>
+
+<div class="footer-butons contenido-principal" *ngIf="form" >
+    <button mat-flat-button color="warn" [disabled]="form.invalid || iniciarLlamadaBackend" (click)="siguiente()" >
+        <mat-icon *ngIf="iniciarLlamadaBackend"><mat-spinner diameter="20">
+        </mat-spinner></mat-icon>
+        Continuar
+    </button>
+</div>

@@ -1,0 +1,6 @@
+{
+    "/boleta": {
+        "secure": false,
+        "changeOrigin": false
+    }
+}
